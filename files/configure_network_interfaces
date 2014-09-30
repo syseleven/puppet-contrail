@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# 2014, s.andres@syseleven.de
+#
+# configure compute node network interfaces for sys11 dev cloud for contrail
+#
+
+shopt -s extglob
+
+cd /etc/network/interfaces.d
+
+cat > eth0.cfg <<EOF
+auto eth0 
+iface eth0 inet static
+  address 0.0.0.0
+EOF
+
+cat > eth1.cfg <<EOF
+auto eth1
+iface eth1 inet dhcp
+  post-up route del default dev \$IFACE
+EOF
+
+#cat > eth2.cfg <<EOF
+#auto eth2
+#iface eth2 inet dhcp
+#  post-up route del default dev \$IFACE
+#EOF
+
+
+cat > vhost0.cfg<<EOF
+auto vhost0
+iface vhost0 inet dhcp
+        pre-up vif --create vhost0 --mac \$(cat /sys/class/net/eth0/address)
+        pre-up vif --add vhost0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --mode x --type vhost
+        pre-up vif --add eth0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --mode x --type physical
+EOF
+
+/etc/init.d/networking restart

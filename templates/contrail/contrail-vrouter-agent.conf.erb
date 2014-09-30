@@ -1,0 +1,139 @@
+#
+# Vnswad configuration options
+#
+
+[CONTROL-NODE]
+server = <%= @control_node %>
+
+[DEFAULT]
+# configured, value provided by discovery service will be used. Multiple
+# IP:port strings separated by space can be provided
+collectors = <%= @collectors %>
+
+# Enable/disable debug logging. Possible values are 0 (disable) and 1 (enable)
+debug = <%= @debug %>
+
+# Aging time for flow-records in seconds
+# flow_cache_timeout = <%= @flow_cache_timeout %>
+
+# Hostname of compute-node. If this is not configured value from `hostname`
+# will be taken
+#hostname = <%= @hostname %>
+
+# Http server port for inspecting vnswad state (useful for debugging)
+http_server_port = <%= @http_server_port %>
+
+# Category for logging. Default value is '*'
+# log_category = <%= @log_category %>
+
+# Local log file name
+# log_file = <%= @log_file %>
+
+# Log severity levels. Possible values are SYS_EMERG, SYS_ALERT, SYS_CRIT, 
+# SYS_ERR, SYS_WARN, SYS_NOTICE, SYS_INFO and SYS_DEBUG. Default is SYS_DEBUG
+log_level = <%= @log_level %>
+
+# Enable/Disable local file logging. Possible values are 0 (disable) and 1 (enable)
+# log_local = <%= @log_local %>
+
+# Encapsulation type for tunnel. Possible values are MPLSoGRE, MPLSoUDP, VXLAN
+# tunnel_type = <%= @tunnel_type %>
+
+[DISCOVERY]
+#If DEFAULT.collectors and/or CONTROL-NODE and/or DNS is not specified this 
+#section is mandatory. Else this section is optional
+
+# IP address of discovery server
+#server = <%= @server %>
+
+# Number of control-nodes info to be provided by Discovery service. Possible
+# values are 1 and 2
+max_control_nodes = <%= @max_control_nodes %>
+
+[DNS]
+# IP address to be used to connect to dns-node. Maximum of 2 IP addresses 
+# (separated by a space) can be provided. If no IP is configured then the
+# value provided by discovery service will be used. (Optional)
+# server = <%= @server %>
+
+[HYPERVISOR]
+# Everything in this section is optional
+
+# Hypervisor type. Possible values are kvm, xen and vmware
+# type = <%= @type %>
+
+# Link-local IP address and prefix in ip/prefix_len format (for xen)
+# xen_ll_ip = <%= @xen_ll_ip %>
+
+# Link-local interface name when hypervisor type is Xen
+# xen_ll_interface = <%= @xen_ll_interface %>
+
+# Physical interface name when hypervisor type is vmware
+# vmware_physical_interface = <%= @vmware_physical_interface %>
+
+[FLOWS]
+# Everything in this section is optional
+
+# Maximum flows allowed per VM (given as % of maximum system flows)
+# max_vm_flows = <%= @max_vm_flows %>
+
+# Maximum number of link-local flows allowed across all VMs
+# max_system_linklocal_flows = <%= @max_system_linklocal_flows %>
+
+# Maximum number of link-local flows allowed per VM
+# max_vm_linklocal_flows = <%= @max_vm_linklocal_flows %>
+
+[METADATA]
+# Shared secret for metadata proxy service (Optional)
+metadata_proxy_secret = <%= @metadata_shared_secret %>
+
+[NETWORKS]
+# control-channel IP address used by WEB-UI to connect to vnswad to fetch
+# required information (Optional)
+control_network_ip = <%= @control_network_ip %>
+
+[VIRTUAL-HOST-INTERFACE]
+# Everything in this section is mandatory
+
+# name of virtual host interface
+name = <%= @vhost_name %>
+
+# IP address and prefix in ip/prefix_len format
+ip = <%= @vhost_ip %>
+
+# Gateway IP address for virtual host
+gateway = <%= @vhost_gateway %>
+
+# Physical interface name to which virtual host interface maps to
+physical_interface = <%= @vhost_physical_interface %>
+
+# We can have multiple gateway sections with different indices in the 
+# following format
+[GATEWAY-0]
+# Name of the routing_instance for which the gateway is being configured
+# routing_instance = <%= @routing_instance %>
+
+# Gateway interface name
+# interface = <%= @interface %>
+
+# Virtual network ip blocks for which gateway service is required. Each IP
+# block is represented as ip/prefix. Multiple IP blocks are represented by 
+# separating each with a space
+# ip_blocks = <%= @ip_blocks %>
+
+[GATEWAY-1]
+# Name of the routing_instance for which the gateway is being configured
+# routing_instance = <%= @routing_instance %>
+
+# Gateway interface name
+# interface = <%= @interface %>
+
+# Virtual network ip blocks for which gateway service is required. Each IP
+# block is represented as ip/prefix. Multiple IP blocks are represented by 
+# separating each with a space
+# ip_blocks = <%= @ip_blocks %>
+
+# Routes to be exported in routing_instance. Each route is represented as
+# ip/prefix. Multiple routes are represented by separating each with a space
+# routes = <%= @routes %>
+

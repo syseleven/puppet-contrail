@@ -1,0 +1,37 @@
+[DEFAULTS]
+zk_server_ip = <%= @zk_server_ip %>
+zk_server_port = <%= @zk_server_port %>
+listen_ip_addr = <%= @listen_ip_addr %>
+listen_port = <%= @listen_port %>
+log_local = <%= @log_local %>
+log_file = <%= @log_file %>
+log_level = <%= @log_level %>
+cassandra_server_list = <%= @cassandra_server_list %>
+reset_config = <%= @reset_config %>
+
+## minimim time to allow client to cache service information (seconds)
+#ttl_min = 300
+#
+## maximum time to allow client to cache service information (seconds)
+#ttl_max = 1800
+#
+## health check ping interval < = 0 for disabling
+#hc_interval = 5
+#
+## maximum hearbeats to miss before server will declare publisher out of
+## service.
+#hc_max_miss = 3
+#
+## use short TTL for agressive rescheduling if all services are not up
+#ttl_short = 1
+#
+#######################################################################
+## Other service specific knobs ...
+#
+## use short TTL for agressive rescheduling if all services are not up
+## ttl_short = 1
+#
+## specify policy to use when assigning services
+## policy  =  [load-balance | round-robin | fixed]
+#######################################################################
+#

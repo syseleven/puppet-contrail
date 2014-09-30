@@ -1,0 +1,26 @@
+[DEFAULTS]
+log_file = /var/log/contrail/contrail-api.log
+ifmap_server_ip = <%= @ifmap_server_ip %>
+ifmap_server_port = <%= @ifmap_server_port %>
+ifmap_username = <%= @ifmap_username %>
+ifmap_password = <%= @ifmap_password %>
+cassandra_server_list = <%= @cassandra_server_list %>
+listen_ip_addr = <%= @listen_ip_addr %>
+listen_port = <%= @listen_port %>
+auth = <%= @auth %>
+multi_tenancy = <%= @multi_tenancy %>
+disc_server_ip = <%= @disc_server_ip %>
+disc_server_port = <%= @disc_server_port %>
+zk_server_ip = <%= @zk_server_ip %>
+rabbit_server = <%= @rabbit_server %>
+rabbit_user = <%= @rabbit_user %>
+rabbit_password = <%= @rabbit_password %>
+
+[KEYSTONE]
+auth_host = <%= @keystone_auth_host %>
+auth_port = <%= @keystone_auth_port %>
+auth_protocol = <%= @keystone_auth_protocol %>
+admin_user = <%= @keystone_admin_user %>
+admin_password = <%= @keystone_admin_password %>
+admin_tenant_name = <%= @keystone_admin_tenant_name %>
+
