@@ -16,17 +16,17 @@ See the License for the specific language governing permissions and
 ### Overview
 
 This module sets up OpenContrail. It follows the profile/role pattern, i.e. it
-contains atomic profile classes for services and other atomic pieces of
-configuration such as network devices. These profiles are aggregated into roles
-to be assigned to machines in an OpenContrail enabled OpenStack cloud. At
-present the following roles are defined:
+contains profile classes for services and other atomic pieces of configuration
+such as network devices. These profiles are aggregated into roles to be
+assigned to machines in an OpenContrail enabled OpenStack cloud. At present the
+following roles are defined:
 
 
 1. role/compute - Contains the minimum set of profiles required to configure
    contrail on a Nova compute node.
 
-2. role/control - Contains all contrail services not running on compute node.
-   This includes the controller, log collection and analytics, database
+2. role/controller - Contains all contrail services not running on compute
+   nodes. This includes the controller, log collection and analytics, database
    services and the web UI among others.
 
 
