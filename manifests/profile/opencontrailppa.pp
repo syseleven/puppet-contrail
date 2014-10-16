@@ -1,18 +1,24 @@
 class contrail::profile::opencontrailppa(
-  $key = '24911626',
+  $sys11_key = '24911626',     # ppa:syseleven-platform
+  $upstream_key = '6839FE77',  # ppa:opencontrail
   $source = 'ppa:syseleven-platform/contrail-1.06',
   ) {
 
   include apt
 
   apt::key { 'contrail.key':
-    key        => $key,
+    key        => $upstream_key,
   } 
+
+  apt::key { 'ppa-syseleven-platform.key':
+    key        => $sys11_key,
+  } 
+
 
   exec {'aptitude update':
     path        => '/usr/bin',
     refreshonly => true,
-    require     => Apt::Key['contrail.key'],
+    require     => [ Apt::Key['contrail.key'], Apt::Key['ppa-syseleven-platform.key'] ],
   }
 
   apt::ppa { 'ppa:opencontrail/ppa': }
