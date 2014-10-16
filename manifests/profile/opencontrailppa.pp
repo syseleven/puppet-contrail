@@ -25,11 +25,16 @@ class contrail::profile::opencontrailppa(
 
   apt::ppa { $source : }
 
-  # FIXME snapshot of 1.06 .debs because opencontrail repo sometimes misses them
-#  apt::source { 'contrail_repo_sys11_snapshot':
-#    location    => 'https://files.syseleven.de/~sandres/contrail_deb',
-#    release     => '',
-#    repos       => 'binary/',
-#    include_src => false,
+  # FIXME snapshot of 1.06 .debs because opencontrail repo sometimes misses
+  # them. This repository has been retained as an alternative to
+  # ppa:syseleven-platform/contrail-1.06 for now. To use packages from this
+  # repository configure a contrail version of '1.06' (as opposed to
+  # '1.06-0syseleven0+2' for ppa:syseleven-platform/contrail-1.06).
+  apt::source { 'contrail_repo_sys11_snapshot':
+    location    => 'https://files.syseleven.de/~sandres/contrail_deb',
+    release     => '',
+    repos       => 'binary/',
+    include_src => false,
+  }
 }
 
