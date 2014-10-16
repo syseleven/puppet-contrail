@@ -12,6 +12,8 @@ class contrail::profile::opencontrailppa(
     require     => Apt::Key['contrail.key'],
   }
 
+  apt::ppa { 'ppa:opencontrail/ppa': }
+
   apt::ppa { $source : }
 
   # FIXME snapshot of 1.06 .debs because opencontrail repo sometimes misses them
