@@ -2,6 +2,9 @@ class contrail::profile::opencontrailppa(
   $key = '24911626',
   $source = 'ppa:syseleven-platform/contrail-1.06',
   ) {
+
+  include apt
+
   apt::key { 'contrail.key':
     key        => $key,
   } 
