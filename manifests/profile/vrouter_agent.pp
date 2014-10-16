@@ -33,8 +33,9 @@ class contrail::profile::vrouter_agent(
 
   # Ensure the vrouter module is available for all installed kernels:
 
-  $vrouter_version = regsubst($version, "/-.*//", '')  # Strip Debian package versioning (the source directory name contains just the upstream version)
+  $vrouter_version = regsubst($version, "-.*", '')  # Strip Debian package versioning (the source directory name contains just the upstream version)
 
+  notify{ "vrouter_version: $vrouter_version": }
   exec{'build-vrouter-for-all-kernels':
     command     => "for i in /lib/modules/*; do dkms build vrouter/$vrouter_version -k `basename \$i`; done",
     subscribe   => Package['contrail-vrouter-dkms'],
