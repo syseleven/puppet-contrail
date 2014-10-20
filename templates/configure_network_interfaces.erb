@@ -35,4 +35,9 @@ iface vhost0 inet dhcp
         pre-up vif --add eth0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --mode x --type physical
 EOF
 
+<% if @operatingsystemrelease == '14.04' %>
+ifdown -a
+ifup -a
+<% else %>
 /etc/init.d/networking restart
+<% end %>
