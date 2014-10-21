@@ -1,5 +1,5 @@
 class contrail::role::compute() {
-  include contrail::profile::opencontrailppa
+  require contrail::profile::opencontrailppa
   include contrail::profile::lib
 
   class {'contrail::profile::vrouter_agent':

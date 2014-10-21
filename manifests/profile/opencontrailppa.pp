@@ -2,6 +2,7 @@ class contrail::profile::opencontrailppa(
   $sys11_key = '24911626',     # ppa:syseleven-platform
   $upstream_key = '6839FE77',  # ppa:opencontrail
   $source = 'ppa:syseleven-platform/contrail-1.06',
+  $version = hiera('contrail::version'),
   ) {
 
   include apt
@@ -23,9 +24,15 @@ class contrail::profile::opencontrailppa(
   apt::ppa { 'ppa:opencontrail/ppa': }
   apt::ppa { $source : }
 
+  apt::pin { 'contrail-ppa-sys11':
+    originator => 'LP-PPA-syseleven-platform-contrail-1.06',
+    label      => "Contrail $version",
+    priority   => '1000',
+  }
+
   # FIXME contrail-web-core depends on nodejs version 0.8.15-1contrail1
   # only works for contrail-1.06
-  apt::pin { 'precise':
+  apt::pin { 'nodejs':
     packages => 'nodejs',
     version  => '0.8.15-1contrail1',
     priority => '990',

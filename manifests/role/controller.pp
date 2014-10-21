@@ -1,9 +1,9 @@
 class contrail::role::controller() {
 
-  anchor { 'contrail::begin': }
-  include contrail::profile::opencontrailppa
-  include contrail::profile::lib
+  require contrail::profile::opencontrailppa
 
+  anchor { 'contrail::begin': }
+  class {'contrail::profile::lib':}
   class {'contrail::profile::cassandra':} ->
   class {'contrail::profile::zookeeper':} ->
   class {'contrail::profile::rabbitmq':} ->
