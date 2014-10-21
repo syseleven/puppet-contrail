@@ -25,17 +25,19 @@ class contrail::profile::opencontrailppa(
   apt::ppa { $source : }
 
   apt::pin { 'contrail-ppa-sys11':
-    originator => 'LP-PPA-syseleven-platform-contrail-1.06',
+    originator => "LP-PPA-syseleven-platform-contrail-$version",
     label      => "Contrail $version",
     priority   => '1000',
   }
 
-  # FIXME contrail-web-core depends on nodejs version 0.8.15-1contrail1
-  # only works for contrail-1.06
-  apt::pin { 'nodejs':
-    packages => 'nodejs',
-    version  => '0.8.15-1contrail1',
-    priority => '990',
+  if $version == '1.06' {
+    # FIXME contrail-web-core depends on nodejs version 0.8.15-1contrail1
+    # only works for contrail-1.06
+    apt::pin { 'nodejs':
+      packages => 'nodejs',
+      version  => '0.8.15-1contrail1',
+      priority => '990',
+    }
   }
 }
 
