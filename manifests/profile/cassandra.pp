@@ -16,7 +16,7 @@ class contrail::profile::cassandra() {
   apt::key { 'datastax.key':
     key        => 'B999A372',
     key_source => 'http://debian.datastax.com/debian/repo_key',
-  } 
+  }
 
   apt::source { 'datastax.repo':
     location    => 'http://debian.datastax.com/community/',
@@ -26,13 +26,15 @@ class contrail::profile::cassandra() {
     include_src => false,
   }
 
-  alternatives { 'java':
-    path => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
-  }
 
   package {'openjdk-7-jre':
     ensure  => latest,
     require => Apt::Source['datastax.repo'],
+  }
+
+  alternatives { 'java':
+    path    => '/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java',
+    require => Package['openjdk-7-jre'],
   }
 
   package {'cassandra':
