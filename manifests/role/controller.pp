@@ -2,7 +2,6 @@ class contrail::role::controller() {
 
   require contrail::profile::opencontrailppa
 
-  anchor { 'contrail::begin': }
   class {'contrail::profile::lib':}
   class {'contrail::profile::cassandra':} ->
   class {'contrail::profile::zookeeper':} ->
@@ -19,8 +18,12 @@ class contrail::role::controller() {
   class {'contrail::profile::apiserver':} ->
   class {'contrail::profile::schema_transformer':} ->
   class {'contrail::profile::svc_monitor':} ->
-  class {'contrail::profile::control_node':} ->
-  class {'contrail::profile::neutron::server':} ->
+  class {'contrail::profile::control_node': } ->
+  class {'contrail::profile::neutron::server': } ~>
+  exec{'restart contrail-api':
+    command     => '/usr/sbin/service contrail-api restart',
+    refreshonly => true,
+  } ->
   class {'contrail::profile::analytics::collector':} ->
   class {'contrail::profile::analytics::query_engine':} ->
   class {'contrail::profile::analytics::analytics_api':} ->
@@ -30,7 +33,4 @@ class contrail::role::controller() {
     action => 'import',
   } ->
   class { 'contrail::profile::webui': }
-  anchor { 'contrail::end':
-    notify =>Service['contrail-api'],
-    }
 }
