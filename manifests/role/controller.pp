@@ -30,5 +30,7 @@ class contrail::role::controller() {
     action => 'import',
   } ->
   class { 'contrail::profile::webui': }
-  anchor { 'contrail::end': }
+  anchor { 'contrail::end':
+    notify =>Service['contrail-api'],
+    }
 }
