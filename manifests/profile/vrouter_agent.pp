@@ -13,7 +13,8 @@ class contrail::profile::vrouter_agent(
   $vhost_ip = hiera('contrail::vrouter_agent::vhost_ip'),
   $vhost_gateway = hiera('contrail::vrouter_agent::vhost_gateway'),
   $vhost_physical_interface = hiera('contrail::vrouter_agent::vhost_physical_interface'),
-  $version = hiera('contrail::package_version', 'installed')
+  $version = hiera('contrail::package_version', 'installed'),
+  $contrail_version = hiera('contrail::version', '1.06')
 ) {
   include contrail::profile::vrouter_agent::monitoring
 
@@ -33,10 +34,8 @@ class contrail::profile::vrouter_agent(
 
   # Ensure the vrouter module is available for all installed kernels:
 
-  $vrouter_version = regsubst($version, "-.*", '')  # Strip Debian package versioning (the source directory name contains just the upstream version)
-
   exec{'build-vrouter-for-all-kernels':
-    command     => "for i in /lib/modules/*; do dkms build vrouter/$vrouter_version -k `basename \$i`; done",
+    command     => "for i in /lib/modules/*; do dkms build vrouter/$contrail_version -k `basename \$i`; done",
     subscribe   => Package['contrail-vrouter-dkms'],
     refreshonly => true,
     provider    => 'shell',
@@ -44,7 +43,7 @@ class contrail::profile::vrouter_agent(
   }
 
   exec{'install-vrouter-for-all-kernels':
-    command     => "for i in /lib/modules/*; do dkms install vrouter/$vrouter_version -k `basename \$i`; done",
+    command     => "for i in /lib/modules/*; do dkms install vrouter/$contrail_version -k `basename \$i`; done",
     subscribe   => Exec['build-vrouter-for-all-kernels'],
     refreshonly => true,
     provider    => 'shell',
