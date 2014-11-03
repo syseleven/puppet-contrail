@@ -1,11 +1,12 @@
 class contrail::profile::opencontrailppa(
   $sys11_key = '24911626',     # ppa:syseleven-platform
   $upstream_key = '6839FE77',  # ppa:opencontrail
-  $source = 'ppa:syseleven-platform/contrail-1.06',
   $version = hiera('contrail::version'),
   ) {
 
   include apt
+
+  $source = "ppa:syseleven-platform/contrail-$version"
 
   apt::key { 'contrail.key':
     key        => $upstream_key,
