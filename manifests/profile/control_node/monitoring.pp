@@ -5,9 +5,9 @@ class contrail::profile::control_node::monitoring (
   $contrail_version = hiera('contrail::version', '1.06')
 
   if $contrail_version == '1.06' {
-    $process_name = "control-server"
+    $process_name = "-C control-server"
   } else {
-    $process_name = "contrail-control"
+    $process_name = "-a contrail-control"
   }
 
   case $monitoring {
@@ -17,7 +17,7 @@ class contrail::profile::control_node::monitoring (
       }
 
       sensu::check{'contrail-control-node-process':
-        command => "/usr/lib/nagios/plugins/check_procs -C $process_name -c 1:1",
+        command => "/usr/lib/nagios/plugins/check_procs $process_name -c 1:1",
       }
     }
     false:  { }

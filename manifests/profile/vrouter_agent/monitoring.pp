@@ -5,9 +5,9 @@ class contrail::profile::vrouter_agent::monitoring (
   $contrail_version = hiera('contrail::version', '1.06')
 
   if $contrail_version == '1.06' {
-    $process_name = "vnswad"
+    $process_name = "-C vnswad"
   } else {
-    $process_name = "contrail-vrouter-agent"
+    $process_name = "-a contrail-vrouter-agent"
   }
 
   case $monitoring {
@@ -17,7 +17,7 @@ class contrail::profile::vrouter_agent::monitoring (
       }
 
       sensu::check{'contrail-vrouter-agent-process':
-        command => "/usr/lib/nagios/plugins/check_procs -C $process_name -c 1:1",
+        command => "/usr/lib/nagios/plugins/check_procs $process_name -c 1:1",
       }
     }
     false:  { }

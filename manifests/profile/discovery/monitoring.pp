@@ -5,9 +5,9 @@ class contrail::profile::discovery::monitoring (
   $contrail_version = hiera('contrail::version', '1.06')
 
   if $contrail_version == '1.06' {
-    $process_name = "discovery-server"
+    $process_name = "-C discovery-server"
   } else {
-    $process_name = "contrail-discovery"
+    $process_name = "-a contrail-discovery"
   }
 
   case $monitoring {
@@ -17,7 +17,7 @@ class contrail::profile::discovery::monitoring (
       }
 
       sensu::check{'contrail-discovery-server-process':
-        command => "/usr/lib/nagios/plugins/check_procs -a $process_name -c 1:2",
+        command => "/usr/lib/nagios/plugins/check_procs $process_name -c 1:2",
       }
     }
     false:  { }
