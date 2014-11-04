@@ -31,8 +31,8 @@ cat > vhost0.cfg<<EOF
 auto vhost0
 iface vhost0 inet dhcp
         pre-up vif --create vhost0 --mac \$(cat /sys/class/net/eth0/address)
-        pre-up vif --add eth0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --vhost-phys --type physical
-        pre-up vif --add vhost0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --type vhost --xconnect eth0
+        pre-up vif --add vhost0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --mode x --type vhost
+        pre-up vif --add eth0 --mac \$(cat /sys/class/net/eth0/address) --vrf 0 --mode x --type physical
 EOF
 
 <% if @operatingsystemrelease == '14.04' %>

@@ -8,11 +8,19 @@ class contrail::profile::control_node(
 ) {
   include contrail::profile::control_node::monitoring
 
+  $version = hiera('contrail::package_version', 'installed')
+
+  if $version == '1.06' {
+    $control_config_file = '/etc/contrail/control-node.conf'
+  } else {
+    $control_config_file = '/etc/contrail/contrail-control.conf'
+  }
+
   package {'contrail-control':
     ensure => $version,
   } ->
 
-  file {'/etc/contrail/control-node.conf':
+  file {$control_config_file:
     ensure  => file,
     mode    => '444',
     content => template("$module_name/contrail/control-node.conf.erb"),

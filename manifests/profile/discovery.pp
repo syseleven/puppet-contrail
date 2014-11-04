@@ -12,7 +12,15 @@ class contrail::profile::discovery(
   include contrail::profile::packages::config
   include contrail::profile::discovery::monitoring
 
-  file {'/etc/contrail/discovery.conf':
+  $version = hiera('contrail::package_version', 'installed')
+
+  if $version == '1.06' {
+    $discovery_config_file = '/etc/contrail/discovery.conf'
+  } else {
+    $discovery_config_file = '/etc/contrail/contrail-discovery.conf'
+  }
+
+  file {$discovery_config_file:
     ensure  => file,
     mode    => '444',
     content => template("$module_name/contrail/discovery.conf.erb")
