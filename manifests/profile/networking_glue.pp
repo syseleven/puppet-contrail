@@ -1,6 +1,6 @@
 class contrail::profile::networking_glue() {
 
-  $contrail_version = hiera('contrail::package', '1.06')
+  $contrail_version = hiera('contrail::version', '1.06')
 
   if $contrail_version == '1.06' {
     $template_file = "$module_name/configure_network_interfaces.1.06.erb"
