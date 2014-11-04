@@ -51,8 +51,14 @@ class contrail::profile::vrouter_agent(
   }
 
 
-  kmod::load { 'vrouter': 
+  kmod::load { 'vrouter':
     require => Package['contrail-vrouter-agent'],
+  }
+
+  if $contrail_version == '1.06' {
+    $vrouter_agent_upstart_file = 'contrail-vrouter-agent-1.06.conf'
+  } else {
+    $vrouter_agent_upstart_file = 'contrail-vrouter-agent.conf'
   }
 
   file {'/etc/contrail/contrail-vrouter-agent.conf':
@@ -75,7 +81,7 @@ class contrail::profile::vrouter_agent(
     file { '/etc/init/contrail-vrouter-agent.conf':
       ensure => file,
       mode   => '0644',
-      source => "puppet:///modules/$module_name/upstart/contrail-vrouter-agent.conf",
+      source => "puppet:///modules/$module_name/upstart/$vrouter_agent_upstart_file",
       require => Package['contrail-vrouter-agent'],
       }
     }

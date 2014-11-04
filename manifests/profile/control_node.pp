@@ -8,9 +8,9 @@ class contrail::profile::control_node(
 ) {
   include contrail::profile::control_node::monitoring
 
-  $package_version = hiera('contrail::version', 'installed')
+  $contrail_version = hiera('contrail::version', '1.06')
 
-  if $package_version == '1.06' {
+  if $contrail_version == '1.06' {
     $control_config_file = '/etc/contrail/control-node.conf'
   } else {
     $control_config_file = '/etc/contrail/contrail-control.conf'

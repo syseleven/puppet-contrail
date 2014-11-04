@@ -1,7 +1,7 @@
 class contrail::profile::opencontrailppa(
   $sys11_key = '24911626',     # ppa:syseleven-platform
   $upstream_key = '6839FE77',  # ppa:opencontrail
-  $version = hiera('contrail::version'),
+  $version = hiera('contrail::version', '1.06'),
   ) {
 
   include apt

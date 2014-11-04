@@ -12,9 +12,9 @@ class contrail::profile::discovery(
   include contrail::profile::packages::config
   include contrail::profile::discovery::monitoring
 
-  $version = hiera('contrail::package_version', 'installed')
+  $contrail_version = hiera('contrail::version', '1.06')
 
-  if $version == '1.06' {
+  if $contrail_version == '1.06' {
     $discovery_config_file = '/etc/contrail/discovery.conf'
   } else {
     $discovery_config_file = '/etc/contrail/contrail-discovery.conf'
