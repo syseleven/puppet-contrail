@@ -22,7 +22,6 @@ class contrail::profile::opencontrailppa(
     require     => [ Apt::Key['contrail.key'], Apt::Key['ppa-syseleven-platform.key'] ],
   }
 
-  apt::ppa { 'ppa:opencontrail/ppa': }
   apt::ppa { $source : }
 
   apt::pin { 'contrail-ppa-sys11':
