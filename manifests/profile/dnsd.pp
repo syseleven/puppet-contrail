@@ -1,7 +1,7 @@
 class contrail::profile::dnsd (
   $discovery_server = hiera('contrail::disc_server_ip'),
-  $ifmap_username = hiera('contrail::control_node::ifmap_username'),
-  $ifmap_password = hiera('contrail::control_node::ifmap_password'),
+  $ifmap_username = hiera('contrail::dnsd::ifmap_username'),
+  $ifmap_password = hiera('contrail::dnsd::ifmap_password'),
 ) {
 
   package { 'contrail-dns':
