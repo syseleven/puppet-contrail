@@ -1,5 +1,6 @@
 class contrail::profile::vrouter_agent(
   $control_node = hiera('contrail::control_node::address'),
+  $discovery_server = hiera('contrail::disc_server_ip'),
   $collectors_ip = hiera('contrail::analytics::collectors::address'),
   $collectors_port = hiera('contrail::analytics::collectors::port'),
   $debug = hiera('contrail::vrouter_agent::debug', '1'),

@@ -19,6 +19,7 @@ class contrail::role::controller() {
   class {'contrail::profile::schema_transformer':} ->
   class {'contrail::profile::svc_monitor':} ->
   class {'contrail::profile::control_node': } ->
+  class {'contrail::profile::dnsd': } ->
   class {'contrail::profile::neutron::server': } ~>
   exec{'restart contrail-api':
     command     => '/usr/sbin/service contrail-api restart',
