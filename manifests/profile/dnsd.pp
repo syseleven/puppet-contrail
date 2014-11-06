@@ -16,14 +16,6 @@ class contrail::profile::dnsd (
     notify  => Service['contrail-dns'],
   }
 
-  file { '/etc/contrail/dns/rndc.conf':
-    ensure  => file,
-    mode    => '444',
-    source  => "puppet:///modules/$module_name/contrail/rndc.conf",
-    require => Package['contrail-dns'],
-    notify  => Service['contrail-dns'],
-  }
-
   service { 'contrail-dns':
     ensure  => running,
     enable  => true,
