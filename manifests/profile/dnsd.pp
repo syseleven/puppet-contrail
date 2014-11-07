@@ -6,7 +6,7 @@ class contrail::profile::dnsd (
 
   $contrail_version = hiera('contrail::version', '1.06')
 
-  if versioncmp($contrail_version, '1.10') > 0 {
+  if versioncmp($contrail_version, '1.10') >= 0 {
 
     package { 'contrail-dns':
       ensure => installed,
