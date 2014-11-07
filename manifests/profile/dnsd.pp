@@ -2,11 +2,10 @@ class contrail::profile::dnsd (
   $discovery_server = hiera('contrail::disc_server_ip'),
   $ifmap_username = hiera('contrail::dnsd::ifmap_username'),
   $ifmap_password = hiera('contrail::dnsd::ifmap_password'),
+  $version = hiera('contrail::version', '1.06'),
 ) {
 
-  $contrail_version = hiera('contrail::version', '1.06')
-
-  if versioncmp($contrail_version, '1.10') >= 0 {
+  if versioncmp($version, '1.10') >= 0 {
 
     package { 'contrail-dns':
       ensure => installed,
