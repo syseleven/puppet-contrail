@@ -17,7 +17,7 @@ class contrail::profile::vrouter_agent::monitoring (
       }
 
       sensu::check{'contrail-vrouter-agent-process':
-        command => "/usr/lib/nagios/plugins/check_procs $process_name -c 1:1",
+        command => "/usr/lib/nagios/plugins/check_procs $process_name -c 1:2",
       }
     }
     false:  { }
