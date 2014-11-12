@@ -9,4 +9,10 @@ class contrail::role::compute() {
   class {'contrail::profile::provision_vrouter':
     action => 'export',
   }
+
+  if $::is_virtual {
+    class {'contrail::profile::provision_simple_gateway':
+      action => 'create_vgw_device',
+    }
+  }
 }

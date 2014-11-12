@@ -34,4 +34,11 @@ class contrail::role::controller() {
     action => 'import',
   } ->
   class { 'contrail::profile::webui': }
+
+  if $::is_virtual {
+    class {'contrail::profile::provision_simple_gateway':
+      action => 'create_network',
+    }
+  }
+
 }
