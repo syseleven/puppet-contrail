@@ -10,7 +10,7 @@ class contrail::role::compute() {
     action => 'export',
   }
 
-  if $::is_virtual {
+  if $::is_virtual == 'true' {
     class {'contrail::profile::provision_simple_gateway':
       action => 'create_vgw_device',
     }

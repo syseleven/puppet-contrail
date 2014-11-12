@@ -35,7 +35,7 @@ class contrail::role::controller() {
   } ->
   class { 'contrail::profile::webui': }
 
-  if $::is_virtual {
+  if $::is_virtual == 'true' {
     class {'contrail::profile::provision_simple_gateway':
       action => 'create_network',
     }
