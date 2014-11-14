@@ -38,7 +38,7 @@ class contrail::profile::cassandra() {
   }
 
   package {'cassandra':
-    ensure  => latest,
+    ensure  => installed,
     require => [Package['openjdk-7-jre'], Alternatives['java']],
   }
 }
