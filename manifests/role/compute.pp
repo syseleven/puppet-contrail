@@ -11,7 +11,7 @@ class contrail::role::compute() {
   }
 
   if $::is_virtual == 'true' {
-    class {'contrail::profile::provision_simple_gateway':
+    class {'contrail::profile::provision_floating_ips':
       action => 'create_vgw_device',
     }
   }
