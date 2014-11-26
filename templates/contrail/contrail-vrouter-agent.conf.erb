@@ -3,13 +3,15 @@
 #
 
 [CONTROL-NODE]
-server = <%= @control_node %>
+# let discovery find the IP
+#server = <%= @control_node %>
 
 [DEFAULT]
 
 # configured, value provided by discovery service will be used. Multiple
 # IP:port strings separated by space can be provided
-collectors = <%= @collectors %>
+# let discovery find the IP
+#collectors = <%= @collectors %>
 
 # Enable/disable debug logging. Possible values are 0 (disable) and 1 (enable)
 debug = <%= @debug %>
