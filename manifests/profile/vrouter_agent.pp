@@ -3,11 +3,11 @@ class contrail::profile::vrouter_agent(
   $discovery_server = hiera('contrail::disc_server_ip'),
   $collectors_ip = hiera('contrail::analytics::collectors::address'),
   $collectors_port = hiera('contrail::analytics::collectors::port'),
-  $debug = hiera('contrail::vrouter_agent::debug', '1'),
+  $debug = hiera('contrail::vrouter_agent::debug', '0'),
   $http_server_port = hiera('contrail::vrouter_agent::http_server_port', '8085'),
   $log_level = hiera('contrail::vrouter_agent::log_level', 'SYS_DEBUG'),
   $max_control_nodes = hiera('contrail::vrouter_agent::log_level', '1'),
-  $dns_servers = hiera('contrail::vrouter_agent::dns_servers', 'undef'), #TODO
+  $dns_servers = hiera('contrail::vrouter_agent::dns_servers', 'undef'),
   $metadata_shared_secret = hiera('sys11stack::neutron::metadata_shared_secret'),
   $control_network_ip = hiera('contrail::vrouter_agent::control_network_ip'),
   $vhost_name = hiera('contrail::vrouter_agent::vhost_name', 'vhost0'),
