@@ -1,6 +1,9 @@
 class contrail::profile::kernelppa(
   $sys11_key = '24911626',     # ppa:syseleven-platform
-  $kernel_version = "3.13.0-41.70",
+  $kernel_version = "3.13.0-41-generic",
+  $kernel_major_version = "3.13.0-41.70",
+  $kernel_api_version = "3.13.0-41",
+  $revision = "2",
   $root_device = "/dev/system/root",
   ) {
 
@@ -27,24 +30,29 @@ class contrail::profile::kernelppa(
     priority   => '1000',
   }
 
-  package { 'linux-image-3.13.0-41-generic':
-    ensure => "3.13.0-41.70+syseleven2",
+  package { 'linux-image-$kernel_version':
+    ensure  => "$kernel_major_version+syseleven$revision",
+    require => [ Apt::Ppa["$source"] ],
   }
 
-  package { 'linux-image-extra-3.13.0-41-generic':
-    ensure => "3.13.0-41.70+syseleven2",
+  package { 'linux-image-extra-$kernel_version':
+    ensure  => "$kernel_major_version+syseleven$revision",
+    require => [ Apt::Ppa["$source"] ],
   }
 
-  package { 'linux-headers-3.13.0-41':
-    ensure => "3.13.0-41.70+syseleven2",
+  package { 'linux-headers-$kernel_api_version':
+    ensure  => "$kernel_major_version+syseleven$revision",
+    require => [ Apt::Ppa["$source"] ],
   }
 
-  package { 'linux-headers-3.13.0-41-generic':
-    ensure => "3.13.0-41.70+syseleven2",
+  package { 'linux-headers-$kernel_version':
+    ensure  => §$kernel_major_version+syseleven$revision",
+    require => [ Apt::Ppa["$source"] ],
   }
 
   package { 'linux-libc-dev:amd64':
-    ensure => "3.13.0-41.70+syseleven2",
+    ensure  => "$kernel_major_version+syseleven$revision",
+    require => [ Apt::Ppa["$source"] ],
   }
 
   package { 'gcc-4.6':
