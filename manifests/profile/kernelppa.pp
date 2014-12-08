@@ -1,5 +1,7 @@
 class contrail::profile::kernelppa(
   $sys11_key = '24911626',     # ppa:syseleven-platform
+  $kernel_version = "3.13.0-41.70",
+  $root_device = "/dev/system/root",
   ) {
 
   include apt
@@ -47,7 +49,7 @@ class contrail::profile::kernelppa(
 
   file {'/etc/grub.d/07_default':
     ensure  => file,
-    mode    => '660',
+    mode    => '775',
     content => template("$module_name/grub/07_default.erb"),
   }
 
