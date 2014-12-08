@@ -30,23 +30,23 @@ class contrail::profile::kernelppa(
     priority   => '1000',
   }
 
-  package { 'linux-image-$kernel_version':
+  package { "linux-image-$kernel_version":
     ensure  => "$kernel_major_version+syseleven$revision",
     require => [ Apt::Ppa["$source"] ],
   }
 
-  package { 'linux-image-extra-$kernel_version':
+  package { "linux-image-extra-$kernel_version":
     ensure  => "$kernel_major_version+syseleven$revision",
     require => [ Apt::Ppa["$source"] ],
   }
 
-  package { 'linux-headers-$kernel_api_version':
+  package { "linux-headers-$kernel_api_version":
     ensure  => "$kernel_major_version+syseleven$revision",
     require => [ Apt::Ppa["$source"] ],
   }
 
-  package { 'linux-headers-$kernel_version':
-    ensure  => §$kernel_major_version+syseleven$revision",
+  package { "linux-headers-$kernel_version":
+    ensure  => "$kernel_major_version+syseleven$revision",
     require => [ Apt::Ppa["$source"] ],
   }
 
