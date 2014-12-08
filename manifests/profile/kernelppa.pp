@@ -6,7 +6,7 @@ class contrail::profile::kernelppa(
 
   $source = "ppa:syseleven-platform/contrail-kernel"
 
-  apt::key { 'ppa-syseleven-platform.key':
+  apt::key { 'ppa-syseleven-platform-2.key':
     key        => $sys11_key,
   }
 
