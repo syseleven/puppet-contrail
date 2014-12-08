@@ -1,0 +1,35 @@
+﻿menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-fb534290-7edc-11e4-82df-00215acd73e2' {
+  recordfail
+  load_video
+  gfxmode $linux_gfx_mode
+  insmod gzio
+  insmod part_gpt
+  insmod ext2
+  set root='hd0,gpt1'
+  if [ x$feature_platform_search_hint = xy ]; then
+    search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  <%= @root_device %>
+  else
+    search --no-floppy --fs-uuid --set=root <%= @root_device %>
+  fi
+  linux /vmlinuz-<%= @kernel_version %> root=<%= @root_device %> ro max_loop=64
+  initrd /initrd.img-<%= @kernel_version %>
+}
+submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-fb534290-7edc-11e4-82df-00215acd73e2' {
+  menuentry 'Ubuntu, with the SysEleven default kernel' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-<%= @kernel_version %>-advanced-fb534290-7edc-11e4-82df-00215acd73e2' {
+    recordfail
+    load_video
+    gfxmode $linux_gfx_mode
+    insmod gzio
+    insmod part_gpt
+    insmod ext2
+    set root='hd0,gpt1'
+    if [ x$feature_platform_search_hint = xy ]; then
+      search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  <%= @root_device %>
+    else
+      search --no-floppy --fs-uuid --set=root <%= @root_device %>
+    fi
+    echo  'Loading Linux <%= @kernel_version %> ...'
+    linux /vmlinuz-<%= @kernel_version %> root=<%= @root_device %> ro max_loop=64
+    echo  'Loading initial ramdisk ...'
+    initrd  /initrd.img-<%= @kernel_version %>
+  }
