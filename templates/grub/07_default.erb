@@ -36,11 +36,6 @@ menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menu
   insmod part_gpt
   insmod ext2
   set root='hd0,gpt1'
-  if [ x$feature_platform_search_hint = xy ]; then
-    search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  <%= @root_device %>
-  else
-    search --no-floppy --fs-uuid --set=root <%= @root_device %>
-  fi
   linux /vmlinuz-<%= @kernel_version %> root=<%= @root_device %> ro max_loop=64
   initrd /initrd.img-<%= @kernel_version %>
 }
@@ -53,11 +48,6 @@ submenu 'Advanced options for Ubuntu' $menuentry_id_option 'gnulinux-advanced-fb
     insmod part_gpt
     insmod ext2
     set root='hd0,gpt1'
-    if [ x$feature_platform_search_hint = xy ]; then
-      search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt1 --hint-efi=hd0,gpt1 --hint-baremetal=ahci0,gpt1  <%= @root_device %>
-    else
-      search --no-floppy --fs-uuid --set=root <%= @root_device %>
-    fi
     echo  'Loading Linux <%= @kernel_version %> ...'
     linux /vmlinuz-<%= @kernel_version %> root=<%= @root_device %> ro max_loop=64
     echo  'Loading initial ramdisk ...'
