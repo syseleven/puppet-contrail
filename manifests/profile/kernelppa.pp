@@ -51,6 +51,7 @@ class contrail::profile::kernelppa(
     ensure  => file,
     mode    => '775',
     content => template("$module_name/grub/07_default.erb"),
+    notify  => Exec['update-grub'],
   }
 
   exec{'update-grub':
