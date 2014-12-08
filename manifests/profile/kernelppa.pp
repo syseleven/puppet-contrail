@@ -51,7 +51,7 @@ class contrail::profile::kernelppa(
     ensure => installed,
   }
 
-  package { 'g++4.6':
+  package { 'g++-4.6':
     ensure => installed,
   }
 
