@@ -10,9 +10,10 @@ class contrail::profile::kernelppa(
     key        => $sys11_key,
   }
 
-  exec {'aptitude update':
+  exec {'update package sources':
     path        => '/usr/bin',
     refreshonly => true,
+    command     => "aptitude update",
     require     => [ Apt::Key['ppa-syseleven-platform.key'] ],
   }
 
