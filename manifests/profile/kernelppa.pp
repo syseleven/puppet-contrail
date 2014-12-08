@@ -47,6 +47,14 @@ class contrail::profile::kernelppa(
     ensure => "3.13.0-41.70+syseleven2",
   }
 
+  package { 'gcc-4.6':
+    ensure => installed,
+  }
+
+  package { 'g++4.6':
+    ensure => installed,
+  }
+
   file {'/etc/grub.d/07_default':
     ensure  => file,
     mode    => '775',
