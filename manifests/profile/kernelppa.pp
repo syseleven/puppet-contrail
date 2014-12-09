@@ -64,17 +64,26 @@ class contrail::profile::kernelppa(
     ensure => installed,
   }
 
-  file {'/etc/grub.d/07_default':
-    ensure  => file,
-    mode    => '775',
-    content => template("$module_name/grub/07_default.erb"),
-    notify  => Exec['update-grub'],
+  if $::is_virtual == 'true' {
+    file {'/etc/grub.d/07_default':
+      ensure  => file,
+      mode    => '775',
+      content => template("$module_name/grub/07_default_virtual.erb"),
+      notify  => Exec['update-grub'],
+    }
+  } else {
+    file {'/etc/grub.d/07_default':
+      ensure  => file,
+      mode    => '775',
+      content => template("$module_name/grub/07_default.erb"),
+      notify  => Exec['update-grub'],
+    }
   }
 
   exec{'update-grub':
     command     => "update-grub",
-    require     => File['/etc/grub.d/07_default'],
     refreshonly => true,
     path        => '/usr/bin/:/bin/:/sbin/:/usr/sbin/',
   }
+
 }
