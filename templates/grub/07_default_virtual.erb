@@ -35,6 +35,6 @@ menuentry 'Ubuntu, with the SysEleven default kernel' --class ubuntu --class gnu
   insmod gzio
   insmod ext2
   set root='hd0,0'
-  linux /vmlinuz-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %> root=<%= @root_device %> ro max_loop=64
-  initrd /initrd.img-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %>
+  linux /boot/vmlinuz-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %> root=<%= @root_device %> ro max_loop=64
+  initrd /boot/initrd.img-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %>
 }
