@@ -36,6 +36,6 @@ menuentry 'Ubuntu, with the SysEleven default kernel' --class ubuntu --class gnu
   insmod part_gpt
   insmod ext2
   set root='hd0,gpt1'
-  linux /vmlinuz-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %> root=<%= @root_device %> ro max_loop=64
+  linux /vmlinuz-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %> root=<%= @root_device %> ro crashkernel=128M nmi_watchdog=1 max_loop=64
   initrd /initrd.img-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %>
 }
