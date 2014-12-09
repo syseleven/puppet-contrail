@@ -1,10 +1,11 @@
 class contrail::profile::kernelppa(
   $sys11_key = '24911626',     # ppa:syseleven-platform
-  $kernel_version = "3.13.0-41-generic",
-  $kernel_major_version = "3.13.0-41.70",
-  $kernel_api_version = "3.13.0-41",
-  $revision = "2",
   $root_device = "/dev/system/root",
+  $kernel_version = '3.13.0',
+  $kernel_abi_version = '41',
+  $kernel_pkg_revision = '70',
+  $kernel_flavor = 'generic',
+  $kernel_pkg_s11_rev = '2',
   ) {
 
   include apt
@@ -30,28 +31,28 @@ class contrail::profile::kernelppa(
     priority   => '1000',
   }
 
-  package { "linux-image-$kernel_version":
-    ensure  => "$kernel_major_version+syseleven$revision",
+  package { "linux-image-$kernel_version-$kernel_abi_version-$kernel_flavor":
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
-  package { "linux-image-extra-$kernel_version":
-    ensure  => "$kernel_major_version+syseleven$revision",
+  package { "linux-image-extra-$kernel_version-$kernel_abi_version-$kernel_flavor":
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
-  package { "linux-headers-$kernel_api_version":
-    ensure  => "$kernel_major_version+syseleven$revision",
+  package { "linux-headers-$kernel_version-$kernel_abi_version":
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
-  package { "linux-headers-$kernel_version":
-    ensure  => "$kernel_major_version+syseleven$revision",
+  package { "linux-headers-$kernel_version-$kernel_abi_version-$kernel_flavor":
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
   package { 'linux-libc-dev:amd64':
-    ensure  => "$kernel_major_version+syseleven$revision",
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
