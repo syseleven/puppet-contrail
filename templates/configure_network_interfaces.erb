@@ -14,19 +14,6 @@ iface eth0 inet static
   address 0.0.0.0
 EOF
 
-cat > eth1.cfg <<EOF
-auto eth1
-iface eth1 inet dhcp
-  post-up route del default dev \$IFACE
-EOF
-
-#cat > eth2.cfg <<EOF
-#auto eth2
-#iface eth2 inet dhcp
-#  post-up route del default dev \$IFACE
-#EOF
-
-
 cat > vhost0.cfg<<EOF
 auto vhost0
 iface vhost0 inet dhcp
