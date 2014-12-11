@@ -34,6 +34,6 @@ menuentry 'Ubuntu, with the SysEleven default kernel' --class ubuntu --class gnu
   gfxmode $linux_gfx_mode
   insmod gzio
   insmod ext2
-  linux /boot/vmlinuz-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %> root=<%= @root_device %> ro crashkernel=128M nmi_watchdog=1 max_loop=64
+  linux /boot/vmlinuz-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %> root=<%= @root_device %> ro crashkernel=512M nmi_watchdog=1 max_loop=64
   initrd /boot/initrd.img-<%= @kernel_version %>-<%= @kernel_abi_version %>-<%= @kernel_flavor %>
 }
