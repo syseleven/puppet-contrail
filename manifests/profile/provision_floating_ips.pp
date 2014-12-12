@@ -42,13 +42,13 @@ class contrail::profile::provision_floating_ips(
   } elsif $action == 'create_vgw_device' {
     exec {'provision simple gateway SNAT':
       command     => 'python /usr/share/contrail-utils/provision_vgw_interface.py --oper create --interface vgw1 --subnets 10.0.0.0/24 --vrf default-domain:admin:private:private --routes 0.0.0.0/0',
-      environment => ['PYTHONPATH=/usr/lib/python2.7/dist-packages/nova_contrail_vif/gen_py/instance_service'],
+      environment => ['PYTHONPATH=/usr/lib/python2.7/dist-packages/contrail_vrouter_api/gen_py/instance_service'],
       path        => '/bin:/usr/bin:/sbin:/usr/sbin',
       unless      => 'ifconfig vgw1',
     }
     exec {'provision simple gateway floating IPs':
       command     => 'python /usr/share/contrail-utils/provision_vgw_interface.py --oper create --interface vgw2 --subnets 192.168.254.0/24 --vrf default-domain:admin:public:public --routes 0.0.0.0/0',
-      environment => ['PYTHONPATH=/usr/lib/python2.7/dist-packages/nova_contrail_vif/gen_py/instance_service'],
+      environment => ['PYTHONPATH=/usr/lib/python2.7/dist-packages/contrail_vrouter_api/gen_py/instance_service'],
       path        => '/bin:/usr/bin:/sbin:/usr/sbin',
       unless      => 'ifconfig vgw2',
     }
