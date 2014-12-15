@@ -233,7 +233,12 @@ config.logs.level = 'debug';
  * Default: false
  *
 ******************************************************************************/
-config.getDomainProjectsFromApiServer = true;
+config.getDomainProjectsFromApiServer = false;
+
+config.getDomainsFromApiServer = false;
+
+config.network = {};
+config.network.L2_enable = false;
 
 // Export this as a module.
 module.exports = config;
