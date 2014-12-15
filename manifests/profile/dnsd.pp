@@ -11,10 +11,10 @@ class contrail::profile::dnsd (
       ensure => installed,
     }
 
-    file { '/etc/contrail/dns/dns.conf':
+    file { '/etc/contrail/dns/contrail-dns.conf':
       ensure  => file,
       mode    => '444',
-      content => template("$module_name/contrail/dns.conf.erb"),
+      content => template("$module_name/contrail/contrail-dns.conf.erb"),
       require => Package['contrail-dns'],
       notify  => Service['contrail-dns'],
     }
