@@ -1,11 +1,11 @@
 class contrail::profile::kernelppa(
-  $sys11_key = '24911626',     # ppa:syseleven-platform
+  $sys11_key = '24911626',
   $root_device = "/dev/system/root",
-  $kernel_version = '3.13.0',
-  $kernel_abi_version = '41',
-  $kernel_pkg_revision = '70',
+  $kernel_version = '3.16.0',
+  $kernel_abi_version = '28',
+  $kernel_pkg_revision = '37',
   $kernel_flavor = 'generic',
-  $kernel_pkg_s11_rev = '2',
+  $kernel_pkg_special_rev = '~14.04.1',
   ) {
 
   include apt
@@ -32,36 +32,23 @@ class contrail::profile::kernelppa(
   }
 
   package { "linux-image-$kernel_version-$kernel_abi_version-$kernel_flavor":
-    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision$kernel_pkg_special_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
   package { "linux-image-extra-$kernel_version-$kernel_abi_version-$kernel_flavor":
-    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision$kernel_pkg_special_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
   package { "linux-headers-$kernel_version-$kernel_abi_version":
-    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision$kernel_pkg_special_rev",
     require => [ Apt::Ppa["$source"] ],
   }
 
   package { "linux-headers-$kernel_version-$kernel_abi_version-$kernel_flavor":
-    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
+    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision$kernel_pkg_special_rev",
     require => [ Apt::Ppa["$source"] ],
-  }
-
-  package { 'linux-libc-dev:amd64':
-    ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision+syseleven$kernel_pkg_s11_rev",
-    require => [ Apt::Ppa["$source"] ],
-  }
-
-  package { 'gcc-4.6':
-    ensure => installed,
-  }
-
-  package { 'g++-4.6':
-    ensure => installed,
   }
 
   if $::is_virtual == 'true' {
