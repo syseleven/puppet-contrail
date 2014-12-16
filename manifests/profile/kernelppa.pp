@@ -39,6 +39,7 @@ class contrail::profile::kernelppa(
   package { "linux-image-extra-$kernel_version-$kernel_abi_version-$kernel_flavor":
     ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision$kernel_pkg_special_rev",
     require => [ Apt::Ppa["$source"] ],
+    notify  => Exec['install-vrouter-for-all-kernels'],
   }
 
   package { "linux-headers-$kernel_version-$kernel_abi_version":

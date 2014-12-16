@@ -35,17 +35,9 @@ class contrail::profile::vrouter_agent(
 
   # Ensure the vrouter module is available for all installed kernels:
 
-  exec{'build-vrouter-for-all-kernels':
-    command     => "for i in /lib/modules/*; do dkms build vrouter/$contrail_version -k `basename \$i`; done",
-    subscribe   => Package['contrail-vrouter-dkms'],
-    refreshonly => true,
-    provider    => 'shell',
-    path        => '/usr/bin/:/bin/:/sbin/:/usr/sbin/',
-  }
-
   exec{'install-vrouter-for-all-kernels':
-    command     => "for i in /lib/modules/*; do dkms install vrouter/$contrail_version -k `basename \$i`; done",
-    subscribe   => Exec['build-vrouter-for-all-kernels'],
+    command     => "for i in /lib/modules/*; do dkms install vrouter/\$(dpkg -l | grep contrail-vrouter-dkms | awk '{print \$3}' | sed 's/-[0-9]*+syseleven[0-9]*//') -k `basename \$i`; done",
+    subscribe   => Package['contrail-vrouter-dkms'],
     refreshonly => true,
     provider    => 'shell',
     path        => '/usr/bin/:/bin/:/sbin/:/usr/sbin/',
