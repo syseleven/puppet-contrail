@@ -6,6 +6,7 @@ class contrail::profile::kernelppa(
   $kernel_pkg_revision = '37',
   $kernel_flavor = 'generic',
   $kernel_pkg_special_rev = '~14.04.1',
+  $control_node_address = hiera('contrail::control_node::address'),
   ) {
 
   include apt
@@ -36,10 +37,19 @@ class contrail::profile::kernelppa(
     require => [ Apt::Ppa["$source"] ],
   }
 
+  if $::ipaddress == $control_node_address {
+      # Do not rebuild vrouter module on controller.
+      $kernel_notify = undef
+    }
+    else {
+      # Do not rebuild vrouter module on compute nodes.
+      $kernel_notify = Exec['install-vrouter-for-all-kernels']
+    }
+
   package { "linux-image-extra-$kernel_version-$kernel_abi_version-$kernel_flavor":
     ensure  => "$kernel_version-$kernel_abi_version.$kernel_pkg_revision$kernel_pkg_special_rev",
     require => [ Apt::Ppa["$source"] ],
-    notify  => Exec['install-vrouter-for-all-kernels'],
+    notify  => $kernel_notify,
   }
 
   package { "linux-headers-$kernel_version-$kernel_abi_version":
