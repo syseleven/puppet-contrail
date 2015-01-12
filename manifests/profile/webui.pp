@@ -1,4 +1,8 @@
-class contrail::profile::webui() {
+class contrail::profile::webui(
+  $keystone_admin_user = hiera('contrail::keystone_admin_user'),
+  $keystone_admin_password = hiera('contrail::keystone_admin_password'),
+  $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
+) {
 
 package{'contrail-web-controller': }
 
