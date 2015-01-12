@@ -1,12 +1,15 @@
 /*
 * Copyright (c) 2014 Juniper Networks, Inc. All rights reserved.
 */
+
 /****************************************************************************
 * Specify the authentication parameters for admin user
 ****************************************************************************/
+
 var auth = {};
 auth.admin_user = '<%= @keystone_admin_user %>';
 auth.admin_password = '<%= @keystone_admin_password %>';
 auth.admin_token = '';
 auth.admin_tenant_name = '<%= @keystone_admin_tenant_name %>';
+
 module.exports = auth;
