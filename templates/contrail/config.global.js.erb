@@ -216,7 +216,7 @@ config.featurePkg.webController.path = '/var/lib/contrail-webui/contrail-web-con
 
 /* Enable/disable Stat Query Links in Sidebar*/
 config.qe = {};
-config.qe.enable_stat_queries = false;
+config.qe.enable_stat_queries = true;
 
 /* Configure level of logs, supported log levels are:
    debug, info, notice, warning, error, crit, alert, emerg
@@ -238,7 +238,7 @@ config.getDomainProjectsFromApiServer = false;
 config.getDomainsFromApiServer = false;
 
 config.network = {};
-config.network.L2_enable = false;
+config.network.L2_enable = true;
 
 // Export this as a module.
 module.exports = config;
