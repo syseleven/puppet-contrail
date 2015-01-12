@@ -17,4 +17,11 @@ service{'contrail-webui-webserver':
     notify  => [Service['contrail-webui-jobserver'], Service['contrail-webui-webserver']],
   }
 
+  file{'/etc/contrail/userAuth.js':
+    content => template("${module_name}/contrail/userAuth.js.erb"),
+    mode    => '0644',
+    require => Package['contrail-web-controller'],
+    notify  => [Service['contrail-webui-jobserver'], Service['contrail-webui-webserver']],
+  }
+
 }
