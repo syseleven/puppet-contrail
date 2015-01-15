@@ -9,6 +9,7 @@ class contrail::profile::provision_floating_ips(
       ensure          => present,
       router_external => 'True',
       tenant_name     => 'admin',
+      id              => '22f204cd-9c93-11e4-82df-00215acd73e2',
     }
 
     neutron_subnet { 'public':
@@ -16,18 +17,23 @@ class contrail::profile::provision_floating_ips(
       cidr         => '192.168.254.0/24',
       network_name => 'public',
       tenant_name  => 'admin',
+      id           => '2b431029-9c93-11e4-82df-00215acd73e2',
     }
 
     neutron_network { 'private':
       ensure      => present,
       tenant_name => 'admin',
+      id          => '42ef397d-9c93-11e4-82df-00215acd73e2',
     }
+
     neutron_subnet { 'private':
       ensure       => present,
       cidr         => '10.0.0.0/24',
       network_name => 'private',
       tenant_name  => 'admin',
+      id           => '4d8f338d-9c93-11e4-82df-00215acd73e2',
     }
+
     neutron_router { 'admin_router':
       ensure               => present,
       tenant_name          => 'admin',
