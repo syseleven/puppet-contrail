@@ -35,6 +35,6 @@ class contrail::profile::opencontrailppa(
   apt::pin { 'nodejs':
     packages => 'nodejs',
     version  => '0.8.15-1contrail1',
-    priority => '990',
+    priority => '1000',
   }
 }
