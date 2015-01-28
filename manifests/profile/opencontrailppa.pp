@@ -30,14 +30,11 @@ class contrail::profile::opencontrailppa(
     priority   => '1000',
   }
 
-  if $version == '1.06' {
-    # FIXME contrail-web-core depends on nodejs version 0.8.15-1contrail1
-    # only works for contrail-1.06
-    apt::pin { 'nodejs':
-      packages => 'nodejs',
-      version  => '0.8.15-1contrail1',
-      priority => '990',
-    }
+  # FIXME contrail-web-core depends on nodejs version 0.8.15-1contrail1
+  # only works for contrail-1.06
+  apt::pin { 'nodejs':
+    packages => 'nodejs',
+    version  => '0.8.15-1contrail1',
+    priority => '1000',
   }
 }
-
