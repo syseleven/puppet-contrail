@@ -1,6 +1,6 @@
 class contrail::profile::kernelppa(
   $sys11_key = '24911626',
-  $root_device = "/dev/system/root",
+  $root_device = "UUID=$::root_device_uuid",
   $kernel_version = '3.16.0',
   $kernel_abi_version = '28',
   $kernel_pkg_revision = '37',
