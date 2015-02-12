@@ -31,7 +31,9 @@ class contrail::profile::apiserver(
 
   file {'/etc/contrail/contrail-api.conf':
     ensure  => file,
-    mode    => '444',
+    owner   => 'contrail',
+    group   => 'contrail',
+    mode    => '0440',
     content => template("$module_name/contrail/contrail-api.conf.erb"),
     notify  => Service['contrail-api'],
   } ~>

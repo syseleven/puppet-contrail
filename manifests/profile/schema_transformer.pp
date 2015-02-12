@@ -23,14 +23,18 @@ class contrail::profile::schema_transformer(
 
   file {'/etc/contrail/contrail-schema.conf':
     ensure  => file,
-    mode    => '444',
+    owner   => 'contrail',
+    group   => 'contrail',
+    mode    => '0440',
     content => template("$module_name/contrail/contrail-schema.conf.erb"),
     notify  => Service['contrail-schema'],
   }
 
   file {'/etc/contrail/vnc_api_lib.ini':
     ensure  => file,
-    mode    => '444',
+    owner   => 'contrail',
+    group   => 'contrail',
+    mode    => '0440',
     content => template("$module_name/contrail/vnc_api_lib.ini.erb"),
     notify  => Service['contrail-schema'],
   }
