@@ -28,7 +28,9 @@ class contrail::profile::svc_monitor(
 
   file {'/etc/contrail/svc-monitor.conf':
     ensure  => file,
-    mode    => '444',
+    owner   => 'contrail',
+    group   => 'contrail',
+    mode    => '0440',
     content => template("$module_name/contrail/svc-monitor.conf.erb"),
     notify  => Service['contrail-svc-monitor'],
   } ~>
