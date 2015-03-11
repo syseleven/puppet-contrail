@@ -1,7 +1,6 @@
 class contrail::role::controller() {
 
   require contrail::profile::opencontrailppa
-  require contrail::profile::kernelppa
 
   class {'contrail::profile::lib':}
   class {'contrail::profile::cassandra':} ->
@@ -12,7 +11,7 @@ class contrail::role::controller() {
   class {'contrail::profile::redis::uve':} ->
   class {'contrail::profile::redis::webui':} ->
   class {'contrail::profile::ifmapserver':
-    require => [Class['contrail::profile::opencontrailppa'], Class['contrail::profile::kernelppa'], Class['contrail::profile::lib']],
+    require => [Class['contrail::profile::opencontrailppa'], Class['contrail::profile::lib']],
 } ->
   class {'contrail::profile::utils':} ->
   class {'contrail::profile::discovery':} ->
