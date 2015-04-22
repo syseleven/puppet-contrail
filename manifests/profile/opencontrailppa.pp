@@ -22,11 +22,10 @@ class contrail::profile::opencontrailppa(
     require     => [ Apt::Key['contrail.key'], Apt::Key['ppa-syseleven-platform.key'] ],
   }
 
-  apt::ppa { $source : }
+  apt::ppa { $source: }
 
   apt::pin { 'contrail-ppa-sys11':
     originator => "LP-PPA-syseleven-platform-contrail-$version",
-    label      => "Contrail $version",
     priority   => '1000',
   }
 
