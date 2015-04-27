@@ -11,9 +11,6 @@ class contrail::role::contrail-api-services() {
   class {'contrail::profile::analytics::analytics_api':} ->
   class {'contrail::profile::provision_linklocal': } ->
   class {'contrail::profile::provision_bgp_peers': } ->
-  class {'contrail::profile::provision_vrouter':
-    action => 'import',
-  }
 
   if $::is_virtual == 'true' {
     class {'contrail::profile::provision_floating_ips':
