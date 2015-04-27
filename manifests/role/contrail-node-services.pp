@@ -1,9 +1,8 @@
-class contrail::role::compute() {
+class contrail::role::contrail-node-services() {
   require contrail::profile::opencontrailppa
-  include contrail::profile::lib
 
   class {'contrail::profile::vrouter_agent':
-    require => [Class['contrail::profile::opencontrailppa'], Class['contrail::profile::lib']],
+    require => Class['contrail::profile::opencontrailppa'],
   } ->
   class {'contrail::profile::nova::compute':} ->
   class {'contrail::profile::provision_vrouter':
