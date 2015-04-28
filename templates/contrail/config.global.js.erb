@@ -146,7 +146,7 @@ config.discoveryService.enable = true;
 
 /* Job Server */
 config.jobServer = {};
-config.jobServer.server_ip = '<%= @cluster_vip %>';
+config.jobServer.server_ip = '127.0.0.01';
 config.jobServer.server_port = '3000';
 
 /* Upload/Download Directory */
@@ -160,7 +160,7 @@ config.redis.server_ip = '<%= @cluster_vip %>';
 
 /* Cassandra Server */
 config.cassandra = {};
-config.cassandra.server_ips = ['<%= @cluster_vip %>'];
+config.cassandra.server_ips = <%= @cassandra_seeds %>;
 config.cassandra.server_port = '9160';
 config.cassandra.enable_edit = false;
 
@@ -169,7 +169,7 @@ config.kue = {};
 config.kue.ui_port = '3002'
 
 /* IP List to listen on */
-config.webui_addresses = ['0.0.0.0'];
+config.webui_addresses = ['<%= @ipaddress_bond0 %>'];
 
 /* Is insecure access to WebUI? 
  * If set as false, then all http request will be redirected

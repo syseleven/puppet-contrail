@@ -3,6 +3,8 @@ class contrail::profile::webui(
   $keystone_admin_password = hiera('contrail::keystone_admin_password'),
   $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
   $cluster_vip = hiera('sys11stack::profile::pacemaker::vip'),
+  $cassandra_seeds = hiera('cassandra::seeds'),
+  $ipaddress_bond0 = $::ipaddress_bond0,
 ) {
 
   package{'contrail-web-controller': }
