@@ -8,6 +8,7 @@ class contrail::profile::discovery(
   $log_level = hiera('contrail::discovery::log_level', 'SYS_DEBUG'),
   $reset_config = hiera('contrail::discovery::reset_config', 'True'),
   $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
+  $control_service = hiera('contrail::discovery::control_service','true'),
 ) {
   include contrail::profile::packages::config
   include contrail::profile::discovery::monitoring
@@ -26,8 +27,10 @@ class contrail::profile::discovery(
     content => template("$module_name/contrail/discovery.conf.erb")
   } ~>
 
-  service {'contrail-discovery':
-    ensure => running,
-    enable => true,
+  if $control_service == 'true' {
+    service {'contrail-discovery':
+      ensure => running,
+      enable => true,
+    }
   }
 }
