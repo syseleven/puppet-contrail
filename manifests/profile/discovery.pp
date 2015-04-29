@@ -27,10 +27,11 @@ class contrail::profile::discovery(
     content => template("$module_name/contrail/discovery.conf.erb")
   } ~>
 
-  if $control_service == true {
-    service {'contrail-discovery':
+  if $control_service {
+    service { 'contrail-discovery':
       ensure => running,
       enable => true,
     }
   }
+
 }
