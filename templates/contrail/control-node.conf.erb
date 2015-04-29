@@ -4,11 +4,10 @@
 [DEFAULT]
 # bgp_config_file=bgp_config.xml
 # bgp_port=179
-# collectors= # Provided by discovery server
+collectors = <%= @collectors %>
 # hostip= # Resolved IP of `hostname`
 # hostname= # Retrieved as `hostname`
 # http_server_port=8083
-#collectors=1.1.1.1:8086
 #log_category=
 #log_disable=0
 log_file = <%= @log_file %>

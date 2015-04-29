@@ -2,8 +2,7 @@ class contrail::profile::analytics::analytics_api(
   $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
   $disc_server_ip  = hiera('contrail::disc_server_ip'),
   $disc_server_port = hiera('contrail::disc_server_port', '5998'),
-  $collectors_ip = hiera('contrail::analytics::collectors::address'),
-  $collectors_port = hiera('contrail::analytics::collectors::port'),
+  $collectors = hiera('contrail::analytics::collectors'),
 
   $log_file = hiera('contrail::analytics::query_engine::log_file', '/var/log/contrail/contrail-analytics-api.log'),
   $log_level = hiera('contrail::analytics::query_engine::log_level', 'SYS_DEBUG'),
@@ -16,8 +15,6 @@ class contrail::profile::analytics::analytics_api(
 ) {
   include contrail::profile::packages::analytics
   include contrail::profile::analytics::analytics_api::monitoring
-
-  $collectors = "${collectors_ip}:${collectors_port}"
 
   file {'/etc/contrail/contrail-analytics-api.conf':
     ensure  => file,

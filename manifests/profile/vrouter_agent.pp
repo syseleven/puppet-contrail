@@ -1,8 +1,7 @@
 class contrail::profile::vrouter_agent(
   $control_node = hiera('contrail::control_node::address'),
   $discovery_server = hiera('contrail::disc_server_ip'),
-  $collectors_ip = hiera('contrail::analytics::collectors::address'),
-  $collectors_port = hiera('contrail::analytics::collectors::port'),
+  $collectors = hiera('contrail::analytics::collectors'),
   $debug = hiera('contrail::vrouter_agent::debug', '0'),
   $http_server_port = hiera('contrail::vrouter_agent::http_server_port', '8085'),
   $log_level = hiera('contrail::vrouter_agent::log_level', 'SYS_DEBUG'),
@@ -18,8 +17,6 @@ class contrail::profile::vrouter_agent(
   $contrail_version = hiera('contrail::version', '1.06')
 ) {
   include contrail::profile::vrouter_agent::monitoring
-
-  $collectors = "${collectors_ip}:${collectors_port}"
 
   package {'contrail-vrouter-utils':
     ensure => $version,

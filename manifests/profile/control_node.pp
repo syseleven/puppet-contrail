@@ -5,6 +5,7 @@ class contrail::profile::control_node(
   $log_file = hiera('contrail::control_node::log_file', '/var/log/contrail/contrail-control-node.log'),
   $log_level = hiera('contrail::control_node::log_level', 'SYS_DEBUG'),
   $version = hiera('contrail::package_version', 'installed')
+  $collectors = hiera('contrail::analytics::collectors'),
 ) {
   include contrail::profile::control_node::monitoring
 
