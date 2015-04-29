@@ -6,7 +6,7 @@ class contrail::profile::analytics::collector(
   $log_file = hiera('contrail::analytics::query_engine::log_file', '/var/log/contrail/contrail-collector.log'),
   $log_level = hiera('contrail::analytics::query_engine::log_level', 'SYS_DEBUG'),
 
-  
+  # Broken in Contrail collector, but here for reference purposes
   $collector_listen_ip = hiera('contrail::analytics::collector::address'),
   $collector_listen_port = hiera('contrail::analytics::collector::port'),
 
