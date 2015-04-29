@@ -25,7 +25,7 @@ class contrail::profile::discovery(
     ensure  => file,
     mode    => '444',
     content => template("$module_name/contrail/discovery.conf.erb")
-  } ~>
+  }
 
   if $control_service {
     service { 'contrail-discovery':
