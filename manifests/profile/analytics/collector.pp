@@ -7,8 +7,8 @@ class contrail::profile::analytics::collector(
   $log_level = hiera('contrail::analytics::query_engine::log_level', 'SYS_DEBUG'),
 
   
-  $collector_listen_ip = hiera('contrail::analytics::collectors::address'),
-  $collector_listen_port = hiera('contrail::analytics::collectors::port'),
+  $collector_listen_ip = hiera('contrail::analytics::collector::address'),
+  $collector_listen_port = hiera('contrail::analytics::collector::port'),
 
   $redis_server = hiera('contrail::analytics::collector::redis_ip'),
   $redis_port = hiera('contrail::analytics::collector::redis_port'),
