@@ -130,7 +130,7 @@ config.cnfg.ca = '';
 // Analytics API server and port.
 config.analytics = {};
 config.analytics.server_ip = '<%= @cluster_vip %>';
-config.analytics.server_port = '8081';
+config.analytics.server_port = '9081';
 config.analytics.authProtocol = 'http';
 config.analytics.strictSSL = false;
 config.analytics.ca = '';
@@ -156,7 +156,7 @@ config.files.download_path = '/tmp';
 /* Redis Server */
 config.redis = {};
 config.redis.server_port = '6379';
-config.redis.server_ip = '<%= @cluster_vip %>';
+config.redis.server_ip = '127.0.0.1';
 
 /* Cassandra Server */
 config.cassandra = {};
@@ -198,7 +198,7 @@ config.redisDBIndex = 3;
 
 /* WebUI Redis Server */
 config.redis_server_port = '6379';
-config.redis_server_ip = '<%= @cluster_vip %>';
+config.redis_server_ip = '127.0.0.1';
 config.redis_dump_file = '/var/lib/redis/dump-webui.rdb';
 
 /* Cache Expiry Time */

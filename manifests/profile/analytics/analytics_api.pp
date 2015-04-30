@@ -11,6 +11,7 @@ class contrail::profile::analytics::analytics_api(
   $redis_collector_port = hiera('contrail::analytics::collector::redis_port'),
   $redis_query_port = hiera('contrail::analytics::query_engine::redis_port'),
   $rest_api_ip = hiera('contrail::analytics::analytics_api::listen_ip', '0.0.0.0'),
+  $rest_api_port = hiera('contrail::analytics::analytics_api::listen_port', '8081'),
   $host_ip = hiera('contrail::analytics::analytics_api::host_ip'),
 ) {
   include contrail::profile::packages::analytics
