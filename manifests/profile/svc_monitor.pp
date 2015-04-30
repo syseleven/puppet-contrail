@@ -20,6 +20,9 @@ class contrail::profile::svc_monitor(
   $keystone_admin_user = hiera('contrail::keystone_admin_user'),
   $keystone_admin_password = hiera('contrail::keystone_admin_password'),
   $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
+
+  $rest_api_ip = hiera('contrail::analytics::analytics_api::listen_ip', '0.0.0.0'),
+  $rest_api_port = hiera('contrail::analytics::analytics_api::listen_port', '8081'),
 ) {
   include contrail::profile::packages::config_openstack
   include contrail::profile::svc_monitor::monitoring
