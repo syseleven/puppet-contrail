@@ -15,6 +15,7 @@ class contrail::profile::apiserver(
   $rabbit_server  = hiera('contrail::rabbit_server'),
   $rabbit_user  = hiera('contrail::rabbit_user'),
   $rabbit_password  = hiera('contrail::rabbit_password'),
+  $rabbit_port = hiera('contrail::rabbit_port'),
 
   $keystone_auth_host = hiera('contrail::keystone_auth_host'),
   $keystone_auth_port = hiera('contrail::keystone_auth_port', '35357'),
