@@ -5,7 +5,7 @@ class contrail::profile::vrouter_agent(
   $debug = hiera('contrail::vrouter_agent::debug', '0'),
   $http_server_port = hiera('contrail::vrouter_agent::http_server_port', '8085'),
   $log_level = hiera('contrail::vrouter_agent::log_level', 'SYS_DEBUG'),
-  $max_control_nodes = hiera('contrail::vrouter_agent::log_level', '1'),
+  $max_control_nodes = hiera('contrail::vrouter_agent::max_control_nodes','2'),
   $metadata_shared_secret = hiera('sys11stack::neutron::metadata_shared_secret'),
   $control_network_ip = hiera('contrail::vrouter_agent::control_network_ip'),
   $dns_address = hiera('contrail::dnsd::address'),
