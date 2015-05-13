@@ -19,7 +19,6 @@ class contrail::profile::schema_transformer(
   $ifmap_server_port = hiera('contrail::ifmap_server_port', '8443'),
   $ifmap_username  = hiera('contrail::svc_monitor::ifmap_username'),
   $ifmap_password  = hiera('contrail::svc_monitor::ifmap_password'),
-  $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
 
   $zk_server_port  = hiera('contrail::zk_server_port','2181'),
   $zk_server_ip = hiera('contrail::zk_server_ip'),
@@ -33,7 +32,8 @@ class contrail::profile::schema_transformer(
   $keystone_admin_user = hiera('contrail::keystone_admin_user'),
   $keystone_admin_password = hiera('contrail::keystone_admin_password'),
   $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
-) {
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+) inherits contrail::resources::params {
   include contrail::profile::packages::config
   include contrail::profile::schema_transformer::monitoring
 

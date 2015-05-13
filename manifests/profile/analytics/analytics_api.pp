@@ -1,5 +1,4 @@
 class contrail::profile::analytics::analytics_api(
-  $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
   $disc_server_ip  = hiera('contrail::disc_server_ip'),
   $disc_server_port = hiera('contrail::disc_server_port', '5998'),
   $collectors = hiera('contrail::analytics::collectors'),
@@ -13,7 +12,8 @@ class contrail::profile::analytics::analytics_api(
   $rest_api_ip = hiera('contrail::analytics::analytics_api::listen_ip', '0.0.0.0'),
   $rest_api_port = hiera('contrail::analytics::analytics_api::listen_port', '8081'),
   $host_ip = hiera('contrail::analytics::analytics_api::host_ip'),
-) {
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+) inherits contrail::resources::params {
   include contrail::profile::packages::analytics
   include contrail::profile::analytics::analytics_api::monitoring
 

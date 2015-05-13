@@ -1,6 +1,4 @@
 class contrail::profile::analytics::collector(
-
-  $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
   $disc_server_ip  = hiera('contrail::disc_server_ip'),
   $disc_server_port = hiera('contrail::disc_server_port', '5998'),
   $log_file = hiera('contrail::analytics::query_engine::log_file', '/var/log/contrail/contrail-collector.log'),
@@ -12,8 +10,8 @@ class contrail::profile::analytics::collector(
 
   $redis_server = hiera('contrail::analytics::collector::redis_ip'),
   $redis_port = hiera('contrail::analytics::collector::redis_port'),
-
-) {
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+) inherits contrail::resources::params {
   include contrail::profile::packages::analytics
   include contrail::profile::analytics::collector::monitoring
 

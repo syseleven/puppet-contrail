@@ -3,7 +3,6 @@ class contrail::profile::apiserver(
   $ifmap_server_port = hiera('contrail::ifmap_server_port', '8443'),
   $ifmap_username  = hiera('contrail::ifmap_username'),
   $ifmap_password  = hiera('contrail::ifmap_password'),
-  $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
   $listen_ip_addr = hiera('contrail::apiserver::listen_ip_addr', '0.0.0.0'),
   $listen_port = hiera('contrail::apiserver::listen_port', '8082'),
   $auth  = hiera('contrail::auth', 'keystone'),
@@ -23,8 +22,8 @@ class contrail::profile::apiserver(
   $keystone_admin_user = hiera('contrail::keystone_admin_user'),
   $keystone_admin_password = hiera('contrail::keystone_admin_password'),
   $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
-
-) {
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+) inherits contrail::resources::params {
   include contrail::profile::packages::config
   include contrail::profile::apiserver::monitoring
 

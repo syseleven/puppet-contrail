@@ -1,6 +1,4 @@
 class contrail::profile::analytics::query_engine(
-
-  $cassandra_server_list  = hiera('contrail::cassandra_server_list'),
   $disc_server_ip  = hiera('contrail::disc_server_ip'),
   $disc_server_port = hiera('contrail::disc_server_port', '5998'),
   $collectors = hiera('contrail::analytics::collectors'),
@@ -9,7 +7,8 @@ class contrail::profile::analytics::query_engine(
   $log_file = hiera('contrail::analytics::query_engine::log_file', '/var/log/contrail/contrail-query-engine.log'),
   $log_level = hiera('contrail::analytics::query_engine::log_level', 'SYS_DEBUG'),
   $http_server_port = hiera('contrail::analytics::query_engine::http_server_port', '8091'),
-) {
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+) inherits contrail::resources::params {
   include contrail::profile::packages::analytics
 
   file {'/etc/contrail/contrail-query-engine.conf':
