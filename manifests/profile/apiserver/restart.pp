@@ -5,7 +5,7 @@ class contrail::profile::apiserver::restart() {
     exec{'restart contrail-api':
       command  => '/usr/sbin/service contrail-api restart',
       provider => 'shell',
-      onlyif   => 'bash -c "[[ \"$(neutron net-list 2>&1)\" == *HTTP\ 500* ]]"'
+      onlyif   => 'bash -c ". /root/openrc; [[ \"$(neutron net-list 2>&1)\" == *HTTP\ 500* ]]"'
     }
   }
 }
