@@ -14,9 +14,9 @@ class contrail::profile::vrouter_agent(
   $vhost_ip = hiera('contrail::vrouter_agent::vhost_ip'),
   $vhost_gateway = hiera('contrail::vrouter_agent::vhost_gateway'),
   $vhost_physical_interface = hiera('contrail::vrouter_agent::vhost_physical_interface'),
-  $max_vm_flows = hiera('contrail::vrouter_agent::max_vm_flows'),
-  $max_system_linklocal_flows = hiera('contrail::vrouter_agent::max_system_linklocal_flows'),
-  $max_vm_linklocal_flows = hiera('contrail::vrouter_agent::max_vm_linklocal_flows'),
+  $max_vm_flows = hiera('contrail::vrouter_agent::max_vm_flows','5'),
+  $max_system_linklocal_flows = hiera('contrail::vrouter_agent::max_system_linklocal_flows','4096'),
+  $max_vm_linklocal_flows = hiera('contrail::vrouter_agent::max_vm_linklocal_flows','1024'),
   $version = hiera('contrail::package_version', 'installed'),
   $contrail_version = hiera('contrail::version', '1.06')
 ) {
