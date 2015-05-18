@@ -20,14 +20,7 @@ class contrail::role::controller() {
   class {'contrail::profile::svc_monitor':} ->
   class {'contrail::profile::control_node': } ->
   class {'contrail::profile::dnsd': } ->
-  class {'contrail::profile::neutron::server': } ~>
-  # dirty workaround because contrail-api needs to be restarted manually
-  # because it does not heal itself after initial deployment
-  exec{'restart contrail-api':
-    command     => 'sleep 10; /usr/sbin/service contrail-api restart',
-    refreshonly => true,
-    provider    => 'shell'
-  } ->
+  class {'contrail::profile::neutron::server': }
   class {'contrail::profile::analytics::collector':} ->
   class {'contrail::profile::analytics::query_engine':} ->
   class {'contrail::profile::analytics::analytics_api':} ->
@@ -44,4 +37,8 @@ class contrail::role::controller() {
     }
   }
 
+  class {'contrail::profile::apiserver::restart':
+    stage   => 'last',
+    require => Class['contrail::profile::neutron::server'],
+  }
 }
