@@ -37,8 +37,7 @@ class contrail::role::controller() {
     }
   }
 
-  class {'contrail::profile::apiserver::restart':
-    stage   => 'last',
-    require => Class['contrail::profile::neutron::server'],
-  }
+  # contrail-api needs a restart after deployment
+  # stages do not work because of dependency cycle
+  class {'contrail::profile::apiserver::restart': }
 }
