@@ -78,13 +78,13 @@ server = <%= @dns_address %>
 # Everything in this section is optional
 
 # Maximum flows allowed per VM (given as % of maximum system flows)
-# max_vm_flows = <%= @max_vm_flows %>
+max_vm_flows = <%= @max_vm_flows %>
 
 # Maximum number of link-local flows allowed across all VMs
-# max_system_linklocal_flows = <%= @max_system_linklocal_flows %>
+max_system_linklocal_flows = <%= @max_system_linklocal_flows %>
 
 # Maximum number of link-local flows allowed per VM
-# max_vm_linklocal_flows = <%= @max_vm_linklocal_flows %>
+max_vm_linklocal_flows = <%= @max_vm_linklocal_flows %>
 
 [METADATA]
 # Shared secret for metadata proxy service (Optional)
