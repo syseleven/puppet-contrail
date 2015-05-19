@@ -3,7 +3,7 @@ class contrail::profile::webui(
   $keystone_admin_password = hiera('contrail::keystone_admin_password'),
   $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
   $cluster_vip = hiera('sys11stack::profile::pacemaker::vip'),
-  $ipaddress_bond0 = $::ipaddress_bond0,
+  $bind_host = hiera('sys11stack::bind_address', '0.0.0.0'),
   $controllers = hiera_hash('sys11stack::controllers', false),
 ) {
 

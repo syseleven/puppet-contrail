@@ -169,7 +169,7 @@ config.kue = {};
 config.kue.ui_port = '3002'
 
 /* IP List to listen on */
-config.webui_addresses = ['<%= @ipaddress_bond0 %>'];
+config.webui_addresses = ['<%= @bind_host %>'];
 
 /* Is insecure access to WebUI? 
  * If set as false, then all http request will be redirected
