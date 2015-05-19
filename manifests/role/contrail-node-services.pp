@@ -1,5 +1,5 @@
-class contrail::role::contrail-node-services() {
-  require contrail::profile::opencontrailppa
+class contrail::role::contrail-node-services(
+) inherits contrail::resources::params {
 
   class {'contrail::profile::vrouter_agent':
     require => Class['contrail::profile::opencontrailppa'],

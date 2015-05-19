@@ -1,6 +1,5 @@
-class contrail::role::contrail-api-services() {
-
-  require contrail::profile::opencontrailppa
+class contrail::role::contrail-api-services(
+) inherits contrail::resources::params {
 
   class {'contrail::profile::apiserver':} ->
   class {'contrail::profile::neutron::server': } ~>

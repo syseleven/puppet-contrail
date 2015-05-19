@@ -1,6 +1,6 @@
-class contrail::role::contrail-config-services() {
+class contrail::role::contrail-config-services(
+) inherits contrail::resources::params {
 
-  require contrail::profile::opencontrailppa
   require contrail::profile::utils
 
   class {'contrail::profile::ifmapserver':
