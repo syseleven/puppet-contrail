@@ -1,8 +1,8 @@
 class contrail::role::contrail-config-services() {
 
   require contrail::profile::opencontrailppa
+  require contrail::profile::utils
 
-  class {'contrail::profile::utils':}
   class {'contrail::profile::ifmapserver':
     require => Class['contrail::profile::opencontrailppa'],
   }
