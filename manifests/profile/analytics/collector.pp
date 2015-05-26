@@ -13,10 +13,10 @@ class contrail::profile::analytics::collector(
   $redis_server = hiera('contrail::analytics::collector::redis_ip'),
   $redis_port = hiera('contrail::analytics::collector::redis_port'),
 
-  $analytics_data_ttl = hiera('contrail::analytics::collector::ttl:data'),
-  $analytics_config_audit_ttl = hiera('contrail::analytics::collector::ttl:config_audit'),
-  $analytics_statistics_ttl = hiera('contrail::analytics::collector::ttl:statistics'),
-  $analytics_flow_ttl = hiera('contrail::analytics::collector::ttl:flow'),
+  $analytics_data_ttl = hiera('contrail::analytics::collector::ttl::data'),
+  $analytics_config_audit_ttl = hiera('contrail::analytics::collector::ttl::config_audit'),
+  $analytics_statistics_ttl = hiera('contrail::analytics::collector::ttl::statistics'),
+  $analytics_flow_ttl = hiera('contrail::analytics::collector::ttl::flow'),
 
 ) {
   include contrail::profile::packages::analytics
