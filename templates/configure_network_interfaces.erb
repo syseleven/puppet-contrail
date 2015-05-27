@@ -16,8 +16,7 @@ EOF
 
 cat > eth1.cfg <<EOF
 auto eth1
-iface eth1 inet static
-  address 0.0.0.0
+iface eth1 inet dhcp
 EOF
 
 cat > vhost0.cfg<<EOF
@@ -30,7 +29,10 @@ EOF
 
 <% if @operatingsystemrelease == '14.04' %>
 ifdown -a
-ifup -a
+# ifup -a does not honor the order, but this is important for the default route being on vhost0
+ifup eth0
+ifup vhost0
+ifup eth1
 <% else %>
 /etc/init.d/networking restart
 <% end %>
