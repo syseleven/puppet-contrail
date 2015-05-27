@@ -10,7 +10,8 @@ class contrail::role::contrail-node-services(
   }
 
   if $::is_virtual == 'true' {
-    class {'contrail::profile::provision_floating_ips':
+    class { 'contrail::profile::networking_glue': }
+    class { 'contrail::profile::provision_floating_ips':
       action => 'create_vgw_device',
     }
   }
