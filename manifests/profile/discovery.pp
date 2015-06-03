@@ -24,7 +24,8 @@ class contrail::profile::discovery(
   file {$discovery_config_file:
     ensure  => file,
     mode    => '444',
-    content => template("$module_name/contrail/discovery.conf.erb")
+    content => template("$module_name/contrail/discovery.conf.erb"),
+    require => Package['contrail-config'],
   }
 
   if $control_service {

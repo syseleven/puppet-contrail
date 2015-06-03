@@ -35,6 +35,7 @@ class contrail::profile::svc_monitor(
     mode    => '0440',
     content => template("$module_name/contrail/svc-monitor.conf.erb"),
     notify  => Service['contrail-svc-monitor'],
+    require => Package['contrail-config'],
   } ~>
 
   service {'contrail-svc-monitor':
