@@ -5,7 +5,7 @@ class contrail::profile::provision_bgp_peers(
   $api_address = hiera('contrail::apiserver::address'),
   $host_ip = hiera('sys11stack::bind_address'),
   $routers = hiera('contrail::routers', false),
-  $router_asn = hiera('contrail::router_asn')
+  $router_asn = hiera('contrail::router_asn', false)
 ) {
 
   if $router_asn {
