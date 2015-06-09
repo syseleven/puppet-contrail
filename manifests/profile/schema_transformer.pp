@@ -17,8 +17,8 @@ class contrail::profile::schema_transformer(
 
   $ifmap_server_ip = hiera('contrail::ifmap_server_ip'),
   $ifmap_server_port = hiera('contrail::ifmap_server_port', '8443'),
-  $ifmap_username  = hiera('contrail::svc_monitor::ifmap_username'),
-  $ifmap_password  = hiera('contrail::svc_monitor::ifmap_password'),
+  $ifmap_username  = hiera('contrail::schema_transformer::ifmap_username'),
+  $ifmap_password  = hiera('contrail::schema_transformer::ifmap_password'),
 
   $zk_server_port  = hiera('contrail::zk_server_port','2181'),
   $zk_server_ip = hiera('contrail::zk_server_ip'),

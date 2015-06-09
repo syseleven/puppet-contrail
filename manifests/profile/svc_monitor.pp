@@ -39,7 +39,7 @@ class contrail::profile::svc_monitor(
   } ~>
 
   # file ships with package and confuses people
-  file { 'contrail-svc-monitor.conf':
+  file { '/etc/contrail/contrail-svc-monitor.conf':
     ensure => absent,
   }
 
