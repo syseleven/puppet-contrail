@@ -38,6 +38,11 @@ class contrail::profile::svc_monitor(
     require => Package['contrail-config'],
   } ~>
 
+  # file ships with package and confuses people
+  file { 'contrail-svc-monitor.conf':
+    ensure => absent,
+  }
+
   service {'contrail-svc-monitor':
     ensure => running,
     enable => true,
