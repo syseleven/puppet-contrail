@@ -16,7 +16,6 @@ class contrail::profile::provision_floating_ip_networks(
     exec {"provision floating ip network $name":
       command   => ". /root/openrc; /usr/local/sbin/provision_floating_ip_network.py --ip_prefix ${floating_ip_networks[$name]['ip_prefix']} --ip_prefix_len ${floating_ip_networks[$name]['ip_prefix_len']} --gateway ${floating_ip_networks[$name]['gateway']} --route_target ${floating_ip_networks[$name]['route_target']} --net_name $name --api_address $api_address",
       provider  => 'shell',
-      logoutput => true,
       unless    => ". /root/openrc && neutron net-show $name",
       require   => [File['/usr/local/sbin/provision_floating_ip_network.py'], Service['contrail-api']],
     }

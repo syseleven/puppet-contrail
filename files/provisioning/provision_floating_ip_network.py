@@ -284,7 +284,6 @@ def create_network_policy(con, project):
 def setup_api():
     keystone_client = get_keystone_client()
     auth_token = keystone_client.get_token(keystone_client.session)
-    print cfg.CONF.api_address
     con = vnc_api.VncApi(api_server_host=conf.get('api_server', cfg.CONF.api_address),
                          auth_token=auth_token)
     return con
