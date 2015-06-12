@@ -83,6 +83,7 @@ conf = {
         'default_pool': ['default-domain', u'admin', _default_net_name, 'default'],
         'default_network_policy': ['default-domain', 'admin', 'default'],
         'default_allow_transit': True,
+        'default_api_address': '127.0.0.1',
         }
 
 def set_default_net_name(value):
@@ -105,7 +106,11 @@ _common_opts = [
     cfg.StrOpt('net_name',
                default=conf.get('default_net_name'),
                help='Name of the floating ip network. Default: %s' % conf.get('default_net_name')),
+    cfg.StrOpt('api_address',
+        default=conf.get('default_api_address'),
+        help='Name of the floating ip network. Default: %s' % conf.get('default_api_address')),
         ]
+
 log = logging.getLogger(__name__)
 
 def get_keystone_client():
@@ -279,7 +284,8 @@ def create_network_policy(con, project):
 def setup_api():
     keystone_client = get_keystone_client()
     auth_token = keystone_client.get_token(keystone_client.session)
-    con = vnc_api.VncApi(api_server_host=conf.get('api_server', 'localhost'),
+    print cfg.CONF.api_address
+    con = vnc_api.VncApi(api_server_host=conf.get('api_server', cfg.CONF.api_address),
                          auth_token=auth_token)
     return con
 
