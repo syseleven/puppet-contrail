@@ -11,7 +11,7 @@ class contrail::profile::discovery(
   $cassandra_server_list = $contrail::resources::params::cassandra_server_list
 ) inherits contrail::resources::params {
   include contrail::profile::packages::config
-  include contrail::profile::discovery::monitoring
+
 
   $contrail_version = hiera('contrail::version', '1.06')
 
@@ -21,14 +21,17 @@ class contrail::profile::discovery(
     $discovery_config_file = '/etc/contrail/contrail-discovery.conf'
   }
 
-  file {$discovery_config_file:
+  file { $discovery_config_file:
     ensure  => file,
-    mode    => '444',
+    mode    => '0444',
     content => template("$module_name/contrail/discovery.conf.erb"),
     require => Package['contrail-config'],
   }
 
   if $control_service {
+    # might be started via pacemaker
+    include contrail::profile::discovery::monitoring
+
     service { 'contrail-discovery':
       ensure => running,
       enable => true,
