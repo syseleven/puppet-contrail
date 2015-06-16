@@ -56,6 +56,7 @@ from vnc_api.gen.resource_xsd import ActionListType
 from vnc_api.gen.resource_xsd import VirtualNetworkPolicyType
 from vnc_api.gen.resource_xsd import RouteTargetList
 from vnc_api.gen.resource_xsd import VirtualNetworkType
+from vnc_api.gen.resource_xsd import SequenceType
 
 from cfgm_common.exceptions import NoIdError
 
@@ -187,6 +188,12 @@ def gen_virtual_network_properties(allow_transit):
     """ Returns a configured vnc_api.gen.resource_xsd.VirtualNetworkType """
     props = VirtualNetworkType(allow_transit=allow_transit)
     return props
+
+def gen_virtual_network_policy():
+    """ Returns a configured vnc_api.gen.resource_xsd.VirtualNetworkPolicyType """
+    sequence = SequenceType(major=0, minor=0)
+    pol = VirtualNetworkPolicyType(sequence=sequence)
+    return pol
 
 def gen_floating_ip_pool(vnet):
     """ Returns a configured vnc_api.gen.resource_client.FloatingIpPool """
@@ -355,7 +362,8 @@ def main(con, ip_prefix, ip_prefix_len, default_gateway, route_target):
     if not vnet.get_network_policy_refs():
         step_created_cnt+=1
         log.debug('connecting default network policy to vnet')
-        vnet.set_network_policy(network_policy, VirtualNetworkPolicyType())
+        virtual_network_policy = gen_virtual_network_policy()
+        vnet.set_network_policy(network_policy, virtual_network_policy)
         con.virtual_network_update(vnet)
         # rebuild vnet object from db, since the local one, does not contain
         # all the refs yet.
