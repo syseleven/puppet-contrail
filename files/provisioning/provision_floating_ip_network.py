@@ -176,6 +176,7 @@ def gen_virtual_network(project, route_target_list, virtual_network_properties):
     vnet = VirtualNetwork(name=conf.get('default_net_name'),
                           parent_obj=project,
                           route_target_list=route_target_list,
+                          router_external=True,
                           virtual_network_properties=virtual_network_properties)
     return vnet
 
