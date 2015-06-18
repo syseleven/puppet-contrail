@@ -1,11 +1,20 @@
 [DEFAULTS]
 log_file = <%= @log_file %>
+ifmap_server_ip = 127.0.0.1
+ifmap_server_port = <%= @ifmap_server_port %>
+ifmap_username = <%= @ifmap_username %>
+ifmap_password = <%= @ifmap_password %>
+api_server_ip = <%= @api_server_ip %>
+api_server_port = <%= @api_server_port %>
+disc_server_ip = <%= @disc_server_ip %>
+disc_server_port = <%= @disc_server_port %>
 cassandra_server_list = <%= @cassandra_server_list %>
 zk_server_ip = <%= @zk_server_ip %>
-disc_server_ip = <%= @disc_server_ip %>
+zk_server_port = <%= @zk_server_port %>
 syslog_facility = LOG_USER
 
 [KEYSTONE]
+auth_host = <%= @keystone_auth_host %>
 admin_user = <%= @keystone_admin_user %>
 admin_password = <%= @keystone_admin_password %>
 admin_tenant_name = <%= @keystone_admin_tenant_name %>

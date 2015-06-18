@@ -1,8 +1,11 @@
 class contrail::profile::utils(
-  $version = hiera('contrail::package_version', 'installed')
+  $version = hiera('contrail::version', '1.06'),
 ) {
+
+  $source = "ppa:syseleven-platform/contrail-$version"
+
   package { 'contrail-utils':
-    ensure => $version,
+    require => Apt::Ppa[$source],
   }
 }
 

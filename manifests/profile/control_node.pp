@@ -4,7 +4,8 @@ class contrail::profile::control_node(
   $ifmap_password = hiera('contrail::control_node::ifmap_password'),
   $log_file = hiera('contrail::control_node::log_file', '/var/log/contrail/contrail-control-node.log'),
   $log_level = hiera('contrail::control_node::log_level', 'SYS_DEBUG'),
-  $version = hiera('contrail::package_version', 'installed')
+  $version = hiera('contrail::package_version', 'installed'),
+  $collectors = $contrail::resources::params::collectors,
 ) {
   include contrail::profile::control_node::monitoring
 

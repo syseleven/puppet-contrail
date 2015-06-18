@@ -1,8 +1,9 @@
 [DEFAULTS]
-#host_ip = <%= @host_ip %>
-collectors = <%= @collectors %>
+host_ip = <%= @host_ip %>
+# collectors = <%= @collectors %>
 #http_server_port = <%= @http_server_port %>
-#rest_api_port = <%= @rest_api_port %>
+cassandra_server_list = <%= @cassandra_server_list %>
+rest_api_port = <%= @rest_api_port %>
 rest_api_ip = <%= @rest_api_ip %>
 #log_local = <%= @log_local %>
 log_level = <%= @log_level %>
@@ -14,8 +15,7 @@ syslog_facility = LOG_USER
 disc_server_ip = <%= @disc_server_ip %>
 disc_server_port = <%= @disc_server_port %>
 
-[REDIS]
-server = <%= @redis_server %>
-redis_server_port = <%= @redis_collector_port %>
-redis_query_port = <%= @redis_query_port %>
-
+# [REDIS]
+# server = <%= @redis_server %>
+# redis_server_port = <%= @redis_collector_port %>
+# redis_query_port = <%= @redis_query_port %>
