@@ -1,0 +1,46 @@
+#!/usr/bin/env python3
+# 2015, m.zumstrull@syseleven.de, s.andres@syseleven.de
+#
+
+from xml.etree import ElementTree
+import json
+import urllib.request
+
+def main():
+    xmlget = urllib.request.urlopen("http://127.0.0.1:8085/Snh_ItfReq?name=")
+    xmldoc = ElementTree.parse(xmlget)
+    interfaces = {}
+    for itfdata in xmldoc.iterfind(".//ItfSandeshData"):
+        itfname = itfdata.findtext("name")
+        #import ipdb;ipdb.set_trace()
+
+
+        if itfname == 'pkt0':
+            continue
+
+        vrf_name = itfdata.find("vrf_name[@link='VrfListReq']").text
+        if 'ERROR' not in vrf_name.upper():
+            continue
+
+        interfaces[itfname] = {}
+        interfaces[itfname]['vrf_name'] = vrf_name
+        interfaces[itfname]['device'] = itfdata.find('name').text
+        interfaces[itfname]['ip'] = itfdata.find('ip_addr').text
+        interfaces[itfname]['mac_addr'] = itfdata.find('mac_addr').text
+        interfaces[itfname]['vm_name'] = itfdata.find('vm_name').text
+        interfaces[itfname]['neutron_port_id'] = itfdata.find('uuid').text
+
+
+    if len(interfaces) > 0:
+        print('WARNING - there are %s interfaces in error state' % (len(interfaces)))
+        print('That means, those VMs DO CURRENTLY NOT HAVE NETWORK capabilities')
+        print("You can check by ``nova show $(neutron port-show $neutron_port_id | awk '/device_id/ { print $4}')`` which VM that is")
+        print('If no port exist in OpenStack, Contrail may have a stale entry for that object')
+        print(json.dumps(interfaces, sort_keys=True, indent=2))
+        exit(1)
+    else:
+        print('OK - all interfaces are in a good status')
+        exit(0)
+
+if __name__ == "__main__":
+    main()
