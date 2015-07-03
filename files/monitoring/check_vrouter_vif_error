@@ -18,17 +18,17 @@ def main():
         if itfname == 'pkt0':
             continue
 
-        vrf_name = itfdata.find("vrf_name[@link='VrfListReq']").text
+        vrf_name = itfdata.findtext("vrf_name[@link='VrfListReq']")
         if 'ERROR' not in vrf_name.upper():
             continue
 
         interfaces[itfname] = {}
         interfaces[itfname]['vrf_name'] = vrf_name
-        interfaces[itfname]['device'] = itfdata.find('name').text
-        interfaces[itfname]['ip'] = itfdata.find('ip_addr').text
-        interfaces[itfname]['mac_addr'] = itfdata.find('mac_addr').text
-        interfaces[itfname]['vm_name'] = itfdata.find('vm_name').text
-        interfaces[itfname]['neutron_port_id'] = itfdata.find('uuid').text
+        interfaces[itfname]['device'] = itfdata.findtext('name')
+        interfaces[itfname]['ip'] = itfdata.findtext('ip_addr')
+        interfaces[itfname]['mac_addr'] = itfdata.findtext('mac_addr')
+        interfaces[itfname]['vm_name'] = itfdata.findtext('vm_name')
+        interfaces[itfname]['neutron_port_id'] = itfdata.findtext('uuid')
 
 
     if len(interfaces) > 0:
