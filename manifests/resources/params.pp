@@ -13,4 +13,6 @@ class contrail::resources::params(
 
   $cassandra_server_list = join(suffix(controllers2array($controllers, 'ips'), ':9160'), ' ')
   $collectors = join(suffix(controllers2array($controllers, 'ips'), ':8086'), ' ')
+
+  $zk_hosts = join(suffix(controllers2array($controllers, 'ips'), ':2181'), ',')
 }

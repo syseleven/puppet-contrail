@@ -6,7 +6,7 @@ class contrail::profile::svc_monitor(
   $ifmap_username  = hiera('contrail::svc_monitor::ifmap_username'),
   $ifmap_password  = hiera('contrail::svc_monitor::ifmap_password'),
   $zk_server_port  = hiera('contrail::zk_server_port'),
-  $zk_server_ip_configured  = hiera('contrail::zk_server_ip'),
+  $zk_server_ip = $contrail::resources::params::zk_hosts,
   $disc_server_ip  = hiera('contrail::disc_server_ip'),
   $disc_server_port = hiera('contrail::disc_server_port', '5998'),
   $region_name = hiera('contrail::svc_monitor::region_name', 'None'),
@@ -25,8 +25,6 @@ class contrail::profile::svc_monitor(
 ) inherits contrail::resources::params {
   include contrail::profile::packages::config_openstack
   include contrail::profile::svc_monitor::monitoring
-
-  $zk_server_ip = "${zk_server_ip_configured}:${zk_server_port}"
 
   file {'/etc/contrail/svc-monitor.conf':
     ensure  => file,

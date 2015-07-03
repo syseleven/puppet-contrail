@@ -1,5 +1,5 @@
 class contrail::profile::discovery(
-  $zk_server_ip = hiera('contrail::zk_server_ip'),
+  $zk_server_ip = $contrail::resources::params::zk_hosts,
   $zk_server_port = hiera('contrail::zk_server_port'),
   $listen_ip_addr = hiera('contrail::discovery::listen_ip_addr', '0.0.0.0'),
   $listen_port = hiera('contrail::discovery::listen_port', '5998'),
@@ -8,7 +8,7 @@ class contrail::profile::discovery(
   $log_level = hiera('contrail::discovery::log_level', 'SYS_DEBUG'),
   $reset_config = hiera('contrail::discovery::reset_config', 'True'),
   $control_service = hiera('contrail::discovery::control_service',true),
-  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list,
 ) inherits contrail::resources::params {
   include contrail::profile::packages::config
 
