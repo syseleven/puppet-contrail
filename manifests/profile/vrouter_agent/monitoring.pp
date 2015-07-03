@@ -23,6 +23,15 @@ class contrail::profile::vrouter_agent::monitoring (
       sensu::check{'contrail-vrouter-agent-http-iface-list':
         command => '/usr/lib/nagios/plugins/check_http -H localhost -p 8085 -T text/xml --url "/Snh_ItfReq" -N',
       }
+
+      file {'/usr/lib/nagios/plugins/check_vrouter_vif_error':
+        ensure => file,
+        mode   => '0555',
+        source => "puppet:///modules/$module_name/monitoring/check_vrouter_vif_error",
+      } ->
+      sensu::check{'contrail-vrouter-vif-error':
+        command => '/usr/lib/nagios/plugins/check_vrouter_vif_error'
+      }
     }
     false:  { }
     default: { fail("Only sensu monitoring supported ('$monitoring' given)") }
