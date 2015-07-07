@@ -30,7 +30,8 @@ class contrail::profile::vrouter_agent::monitoring (
         source => "puppet:///modules/$module_name/monitoring/check_vrouter_vif_error",
       } ->
       sensu::check{'contrail-vrouter-vif-error':
-        command => '/usr/lib/nagios/plugins/check_vrouter_vif_error'
+        command     => '/usr/lib/nagios/plugins/check_vrouter_vif_error',
+        occurrences => 2,
       }
     }
     false:  { }
