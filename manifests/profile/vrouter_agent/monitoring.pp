@@ -31,7 +31,7 @@ class contrail::profile::vrouter_agent::monitoring (
       } ->
       sensu::check{'contrail-vrouter-vif-error':
         command     => '/usr/lib/nagios/plugins/check_vrouter_vif_error',
-        occurrences => 2,
+        occurrences => 5,
       }
     }
     false:  { }
