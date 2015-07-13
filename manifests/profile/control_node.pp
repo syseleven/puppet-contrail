@@ -6,7 +6,9 @@ class contrail::profile::control_node(
   $log_level = hiera('contrail::control_node::log_level', 'SYS_DEBUG'),
   $version = hiera('contrail::package_version', 'installed'),
   $collectors = $contrail::resources::params::collectors,
+  $run_service = hiera('contrail::control_node::run_service', false)
 ) {
+
   include contrail::profile::control_node::monitoring
 
   $contrail_version = hiera('contrail::version', '1.06')
@@ -29,7 +31,7 @@ class contrail::profile::control_node(
   }
 
   service {'contrail-control':
-    ensure => running,
-    enable => true,
+    ensure => $run_service,
+    enable => $run_service,
   }
 }

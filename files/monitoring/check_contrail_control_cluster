@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# 2015, s.andres@syseleven.de
+
+PATH=$PATH:/usr/sbin/
+
+if ((!$#)); then
+  echo "Usage: $0 node1 node2 nodeN ..."
+  exit 1
+fi
+
+check=0
+
+nodes=("$@")
+
+for node in "${nodes[@]}"; do
+  if echo | nc "$node" 8083; then
+    running+=("$node")
+  fi
+done
+
+if [[ ${#running[@]} != 2 ]]; then
+  echo "CRITICAL - contrail-control must only run twice"
+  echo "Running on: ${running[@]}"
+  exit 2
+else
+  echo "OK - contrail-control runs on 2/2 nodes"
+  echo "Running on: ${running[@]}"
+  exit 0
+fi
+
