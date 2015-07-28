@@ -7,7 +7,7 @@ class contrail::resources::params(
 
   require contrail::profile::opencontrailppa
 
-  Package {
+  Package <| tag == 'contrail::profile' |> {
     require => Apt::Ppa[$source],
   }
 
