@@ -21,7 +21,11 @@ class contrail::profile::svc_monitor(
 
   $rest_api_ip = hiera('contrail::analytics::analytics_api::ip', '0.0.0.0'),
   $rest_api_port = hiera('contrail::analytics::analytics_api::port', '8081'),
-  $cassandra_server_list = $contrail::resources::params::cassandra_server_list
+  $cassandra_server_list = $contrail::resources::params::cassandra_server_list,
+  $rabbit_server  = hiera('contrail::rabbit_server'),
+  $rabbit_user  = hiera('contrail::rabbit_user'),
+  $rabbit_password  = hiera('contrail::rabbit_password'),
+  $rabbit_port = hiera('contrail::rabbit_port'),
 ) inherits contrail::resources::params {
   include contrail::profile::packages::config_openstack
   include contrail::profile::svc_monitor::monitoring
