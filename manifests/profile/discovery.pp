@@ -33,8 +33,9 @@ class contrail::profile::discovery(
     include contrail::profile::discovery::monitoring
 
     service { 'contrail-discovery':
-      ensure => running,
-      enable => true,
+      ensure    => running,
+      enable    => true,
+      subscribe => File[$discovery_config_file],
     }
   }
 
