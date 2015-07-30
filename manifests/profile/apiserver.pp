@@ -34,7 +34,7 @@ class contrail::profile::apiserver(
     mode    => '0440',
     content => template("$module_name/contrail/contrail-api.conf.erb"),
     notify  => Service['contrail-api'],
-  } ~>
+  }
 
   service {'contrail-api':
     ensure => running,

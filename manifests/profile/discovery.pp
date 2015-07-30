@@ -36,6 +36,7 @@ class contrail::profile::discovery(
       ensure    => running,
       enable    => true,
       subscribe => File[$discovery_config_file],
+      notify    => Service['contrail-api'],
     }
   }
 
