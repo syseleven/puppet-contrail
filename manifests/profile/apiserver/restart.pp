@@ -6,8 +6,8 @@ class contrail::profile::apiserver::restart() {
       mode    => '0555',
       content => "#!/usr/bin/env bash\n. /root/openrc\n[[ $(neutron net-list 2>&1) == *HTTP\ 500* ]]",
     } ->
-    exec{'restart contrail-api':
-      command  => '/usr/sbin/service contrail-api restart',
+    exec{'restart contrail-api on error 500':
+      command  => '/usr/sbin/service contrail-api restart; date > /tmp/contrail-api_restarted',
       provider => 'shell',
       onlyif   => '/usr/local/sbin/check_neutron_net_list',
     }

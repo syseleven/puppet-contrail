@@ -11,6 +11,7 @@ class contrail::role::contrail-api-services(
   class {'contrail::profile::provision_linklocal': } ->
   class {'contrail::profile::provision_bgp_peers': }
   class {'contrail::profile::provision_floating_ip_networks': }
+  class {'contrail::profile::apiserver::restart': }
 
   class {'contrail::profile::provision_vrouter':
     action => 'import',
