@@ -50,6 +50,13 @@ class contrail::profile::vrouter_agent(
 
   if $contrail_version == '1.06' {
     $vrouter_agent_upstart_file = 'contrail-vrouter-agent-1.06.conf'
+  } elsif $contrail_version == '2.20' {
+    $vrouter_agent_upstart_file = 'contrail-vrouter-agent.conf'
+    # FIXME workaround until python-opencontrail-vrouter-netns package itself has the dependency
+    package { 'python-requests':
+      ensure => '2.7.0-3+syseleven1',
+      before => Package['contrail-vrouter-agent'],
+    }
   } else {
     $vrouter_agent_upstart_file = 'contrail-vrouter-agent.conf'
   }
@@ -59,7 +66,6 @@ class contrail::profile::vrouter_agent(
     mode    => '444',
     content => template("$module_name/contrail/contrail-vrouter-agent.conf.erb"),
     require => Package['contrail-vrouter-agent'],
-    notify  => Service['contrail-vrouter-agent'],
   } ~>
 
   service {'contrail-vrouter-agent':
