@@ -3,9 +3,11 @@ class contrail::profile::svc_monitor::monitoring (
 ) {
   case $monitoring {
     'sensu':  { 
-      sensu::check{'contrail-svc-monitor-tcp':
-        command => '/usr/lib/nagios/plugins/check_tcp  -H localhost -p 8088',
-      }
+      # TODO implement check for active/backup
+      # in backup mode schema will not listen on 8087
+      #sensu::check{'contrail-svc-monitor-tcp':
+      #  command => '/usr/lib/nagios/plugins/check_tcp  -H localhost -p 8088',
+      #}
 
       sensu::check{'contrail-svc-monitor-process':
         command => '/usr/lib/nagios/plugins/check_procs -a contrail-svc-monitor -c 1:2',

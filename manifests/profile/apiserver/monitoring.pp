@@ -1,10 +1,11 @@
 class contrail::profile::apiserver::monitoring (
-  $monitoring       = hiera('sys11stack::monitoring', false),
+  $monitoring = hiera('sys11stack::monitoring', false),
+  $listen_ip = hiera('contrail::apiserver::listen_ip_addr', 'localhost'),
 ) {
   case $monitoring {
-    'sensu':  { 
+    'sensu':  {
       sensu::check{'contrail-api-tcp':
-        command => '/usr/lib/nagios/plugins/check_tcp  -H localhost -p 8082',
+        command => "/usr/lib/nagios/plugins/check_tcp  -H $listen_ip -p 8082",
       }
 
       sensu::check{'contrail-api-process':

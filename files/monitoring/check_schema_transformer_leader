@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# 2015, s.andres@syseleven.de
+
+PATH=$PATH:/usr/sbin/:/usr/lib/nagios/plugins:/usr/lib64/nagios/plugins
+
+if ((!$#)); then
+  echo "Usage: $0 node1 node2 nodeN ..."
+  exit 1
+fi
+
+check=0
+
+nodes=("$@")
+leader=()
+
+for node in "${nodes[@]}"; do
+  if check_tcp  -H "$node" -p 8087 >/dev/null; then
+    leader+=("$node")
+  fi
+done
+
+if ((! ${#leader[@]})); then
+  echo 'CRITICAL- None of the nodes seem to tbe the contrail schema_transformer leader'
+  echo 'That means new VM configuration CANNOT be deployed'
+  echo "${nodes[@]}"
+  exit 1
+else
+  echo "OK - there is at least one contrail schema_transformer leader"
+  echo "${leader[@]}"
+  exit 0
+fi
+    

@@ -1,5 +1,6 @@
 class contrail::profile::discovery::monitoring (
-  $monitoring       = hiera('sys11stack::monitoring', false),
+  $monitoring = hiera('sys11stack::monitoring', false),
+  $listen_ip = hiera('contrail::discovery::listen_ip_addr', 'localhost'),
 ) {
 
   $contrail_version = hiera('contrail::version', '1.06')
@@ -13,7 +14,7 @@ class contrail::profile::discovery::monitoring (
   case $monitoring {
     'sensu':  { 
       sensu::check{'contrail-discovery-server-tcp':
-        command => '/usr/lib/nagios/plugins/check_tcp  -H localhost -p 5998',
+        command => "/usr/lib/nagios/plugins/check_tcp  -H $listen_ip -p 5998",
       }
 
       sensu::check{'contrail-discovery-server-process':

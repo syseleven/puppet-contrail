@@ -27,6 +27,7 @@ class contrail::profile::opencontrailppa(
   apt::pin { 'contrail-ppa-sys11':
     originator => "LP-PPA-syseleven-platform-contrail-$version",
     priority   => '1000',
+    require    => Apt::Key['ppa-syseleven-platform.key'],
   }
 
   # FIXME contrail-web-core depends on nodejs version 0.8.15-1contrail1

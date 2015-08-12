@@ -3,6 +3,5 @@ class contrail::profile::packages::config(
 ) {
   package {'contrail-config':
     ensure  => $version,
-    require => Class['contrail::profile::lib'], 
   }
 }

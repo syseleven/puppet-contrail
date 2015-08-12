@@ -2,7 +2,7 @@ class contrail::profile::provision_vrouter(
   $keystone_admin_user = hiera('contrail::keystone_admin_user'),
   $keystone_admin_password = hiera('contrail::keystone_admin_password'),
   $keystone_admin_tenant_name = hiera('contrail::keystone_admin_tenant_name'),
-  $api_server_ip = hiera('contrail::apiserver::listen_ip_addr', '0.0.0.0'),
+  $api_server_ip = hiera('contrail::apiserver::address','0.0.0.0'),
   $action = false,
 ) {
   if $action == 'export' {

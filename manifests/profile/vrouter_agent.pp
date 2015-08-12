@@ -1,12 +1,10 @@
 class contrail::profile::vrouter_agent(
   $control_node = hiera('contrail::control_node::address'),
   $discovery_server = hiera('contrail::disc_server_ip'),
-  $collectors_ip = hiera('contrail::analytics::collectors::address'),
-  $collectors_port = hiera('contrail::analytics::collectors::port'),
   $debug = hiera('contrail::vrouter_agent::debug', '0'),
   $http_server_port = hiera('contrail::vrouter_agent::http_server_port', '8085'),
   $log_level = hiera('contrail::vrouter_agent::log_level', 'SYS_DEBUG'),
-  $max_control_nodes = hiera('contrail::vrouter_agent::log_level', '1'),
+  $max_control_nodes = hiera('contrail::vrouter_agent::max_control_nodes','2'),
   $metadata_shared_secret = hiera('sys11stack::neutron::metadata_shared_secret'),
   $control_network_ip = hiera('contrail::vrouter_agent::control_network_ip'),
   $dns_address = hiera('contrail::dnsd::address'),
@@ -18,11 +16,10 @@ class contrail::profile::vrouter_agent(
   $max_system_linklocal_flows = hiera('contrail::vrouter_agent::max_system_linklocal_flows','4096'),
   $max_vm_linklocal_flows = hiera('contrail::vrouter_agent::max_vm_linklocal_flows','1024'),
   $version = hiera('contrail::package_version', 'installed'),
-  $contrail_version = hiera('contrail::version', '1.06')
+  $contrail_version = hiera('contrail::version', '1.06'),
+  $collectors = $contrail::resources::params::collectors,
 ) {
   include contrail::profile::vrouter_agent::monitoring
-
-  $collectors = "${collectors_ip}:${collectors_port}"
 
   package {'contrail-vrouter-utils':
     ensure => $version,
@@ -53,6 +50,13 @@ class contrail::profile::vrouter_agent(
 
   if $contrail_version == '1.06' {
     $vrouter_agent_upstart_file = 'contrail-vrouter-agent-1.06.conf'
+  } elsif $contrail_version == '2.20' {
+    $vrouter_agent_upstart_file = 'contrail-vrouter-agent.conf'
+    # FIXME workaround until python-opencontrail-vrouter-netns package itself has the dependency
+    package { 'python-requests':
+      ensure => '2.7.0-3+syseleven1',
+      before => Package['contrail-vrouter-agent'],
+    }
   } else {
     $vrouter_agent_upstart_file = 'contrail-vrouter-agent.conf'
   }
@@ -62,7 +66,6 @@ class contrail::profile::vrouter_agent(
     mode    => '444',
     content => template("$module_name/contrail/contrail-vrouter-agent.conf.erb"),
     require => Package['contrail-vrouter-agent'],
-    notify  => Service['contrail-vrouter-agent'],
   } ~>
 
   service {'contrail-vrouter-agent':
